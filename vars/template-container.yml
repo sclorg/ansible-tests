@@ -1,0 +1,32 @@
+# Command how to deploy container into OpenShift 4.X
+# e.g. oc process -f https://raw.githubusercontent.com/sclorg/cakephp-ex/master/openshift/templates/cakephp.json | oc apply -f -
+deployment: ""
+
+# How to container is named in OpenShift environment. The name will be used for check if POD is running.
+pod_name: "cakephp-example"
+
+# First testing command
+# curl -I <http://....> is http:// is automatically filed by the playbook.
+# The url is taken by command oc get route <pod_name>
+test_command: "curl -I"
+
+# expected_results from test_command
+# In this case is a header of `curl -I` command
+expected_results: "grep 'HTTP/1.1 200 OK'"
+
+# OPTIONAL
+# Second testing command
+# curl <http://....> is http:// is automatically filed by the playbook.
+# The url is taken by command oc get route <pod_name>
+test_command_2: "curl"
+
+# OPTIONAL
+# expected_results_2 from test_command_2
+# in this case out contains a string which is checked.
+expected_results_2: "grep 'Welcome to your CakePHP application on OpenShift'"
+
+# Testing command run in pod_name
+test_exec_command: '/usr/libexec/check-container && echo FINE || echo WRONG'
+
+# expected results from `test_exec_command`
+expected_exec_result: "grep 'FINE"

@@ -1,0 +1,30 @@
+- name: Deploying container {{ item }} into OpenShift 4.3 environment
+  block:
+  - name: Deploy {{ item }}
+    shell: "{{ stuff.deployment }}"
+    changed_when: false
+    register: deploy_cmd
+    ignore_errors: yes
+
+  - name: Check if POD {{ stuff.pod_name }} is running
+    shell: "./files/check_pod_running.sh {{ stuff.pod_name }}"
+    register: cluster_name
+    until: cluster_name.rc == 0
+    retries: 50
+    delay: 10
+    ignore_errors: true
+
+  - name: Expose route with name {{ stuff.pod_name }} for testing
+    shell: "oc expose svc/{{ stuff.pod_name }} --name={{ stuff.pod_name }}"
+    when: (stuff.add_route is defined) and (cluster_name.rc == 0)
+
+  - name: Check if POD {{ stuff.pod_name }} exposes route
+    shell: "oc get routes --no-headers -o custom-columns=HOST:.spec.host | grep {{ stuff.pod_name }}"
+    changed_when: false
+    register: route_cmd
+    until: route_cmd.rc == 0
+    retries: 10
+    delay: 10
+    when: cluster_name.rc == 0
+
+  when: file_exists.stat.exists

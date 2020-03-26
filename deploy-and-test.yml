@@ -1,0 +1,43 @@
+---
+- name: Test RHSCL container images on OpenShift 4.X
+  hosts: localhost
+  vars:
+    testing_dir: "/tmp/rhscl_openshift_dir"
+  tasks:
+    - name: Check temporary directory
+      block:
+        - name: Remove directory
+          file:
+            state: absent
+            path: "{{ testing_dir }}"
+        - name: Create temporary directory
+          file:
+            state: directory
+            path: "{{ testing_dir }}"
+
+    - block:
+      - name: Check if KUBECONFIG is defined
+        command: echo "$KUBECONFIG"
+        register: kube
+      - name: check if kubeconfig is set
+        assert:
+          that:
+          - kube.stdout != ""
+          msg: "KUBECONFIG is not defined"
+        changed_when: false
+      ignore_errors: no
+
+    - name: Clone and test upstream container repositories
+      include_tasks: ./tasks/clone_scl_repo.yml
+      loop:
+        - s2i-ruby-container
+        - s2i-python-container
+        - s2i-perl-container
+        - httpd-container
+        - postgresql-container
+        - mysql-container
+        - nginx-container
+        # The ImageStreamTag "nodejs:12" is invalid: from: Error resolving ImageStreamTag nodejs:12 in namespace openshift: unable to find latest tagged image
+        - s2i-nodejs-container
+        # The ImageStreamTag "php:7.3" is invalid: from: Error resolving ImageStreamTag php:7.3 in namespace openshift: unable to find latest tagged image
+        - cakephp-ex
