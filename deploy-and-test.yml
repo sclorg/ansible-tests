@@ -3,6 +3,7 @@
   hosts: localhost
   vars:
     testing_dir: "/tmp/rhscl_openshift_dir"
+    github_repo: "{{ lookup('env', 'GITHUB_REPO')}}"
   tasks:
     - name: Check temporary directory
       block:
@@ -30,6 +31,10 @@
     - name: Clone and test upstream container repositories
       include_tasks: ./tasks/clone_scl_repo.yml
       loop:
+        # The ImageStreamTag "nodejs:12" is invalid: from: Error resolving ImageStreamTag nodejs:12 in namespace openshift: unable to find latest tagged image
+        - s2i-nodejs-container
+        # The ImageStreamTag "php:7.3" is invalid: from: Error resolving ImageStreamTag php:7.3 in namespace openshift: unable to find latest tagged image
+        - cakephp-ex
         - s2i-ruby-container
         - s2i-python-container
         - s2i-perl-container
@@ -37,7 +42,10 @@
         - postgresql-container
         - mysql-container
         - nginx-container
-        # The ImageStreamTag "nodejs:12" is invalid: from: Error resolving ImageStreamTag nodejs:12 in namespace openshift: unable to find latest tagged image
-        - s2i-nodejs-container
-        # The ImageStreamTag "php:7.3" is invalid: from: Error resolving ImageStreamTag php:7.3 in namespace openshift: unable to find latest tagged image
-        - cakephp-ex
+      when: github_repo is not defined
+
+    - name: Clone and test only one upstream container repository
+      include_tasks: ./tasks/clone_scl_repo.yml
+      loop:
+        - "{{ github_repo }}"
+      when: github_repo is defined
