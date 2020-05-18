@@ -1,23 +1,38 @@
 - block:
-  - name: Check curl command and failed if {{ stuff.check_curl_output }} not in the page content
+  - name: Check curl command is working
     uri:
       url: "http://{{ route_cmd.stdout }}"
       return_content: yes
       status_code: 200
+      body_format: json
     retries: 10
     delay: 10
-    register: this
+    register: curl_output
     ignore_errors: yes
-    failed_when: "'{{ stuff.check_curl_output }}' not in this.content"
-    until: this.status == 200
+    until: curl_output.status == 200
 
-  - debug:
-      var: this
+  - name: Check proper output in json
+    debug:
+      var: curl_output
+
+  - fail:
+      msg: Output {{ stuff.check_curl_output }} is not present in curl command
+    when: '"{{ stuff.check_curl_output }}" not in curl_output["content"]'
 
   when: (stuff.check_curl_output is defined)
 
-- name: Running test in pod by oc exec
-  shell: "{{ stuff.test_exec_command}} {{ cluster_name.stdout }} '{{ stuff.expected_exec_result }}'"
-  ignore_errors: yes
+- block:
+  - name: Running test in pod by oc exec
+    shell: "{{ stuff.test_exec_command }} {{ cluster_name.stdout }} '{{ stuff.expected_exec_result }}'"
+    ignore_errors: yes
+    register: command_out
+    retries: 10
+    delay: 10
+    until: command_out.rc == 0
+
+  - fail:
+      msg: Command {{ stuff.test_exec_command }} {{ cluster_name.stdout }} '{{ stuff.expected_exec_result }}'
+    when: command_out.rc != 0
+
   when: (stuff.test_exec_command is defined)
 
