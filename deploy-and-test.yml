@@ -31,9 +31,7 @@
     - name: Clone and test upstream container repositories
       include_tasks: ./tasks/clone_scl_repo.yml
       loop:
-        # The ImageStreamTag "nodejs:12" is invalid: from: Error resolving ImageStreamTag nodejs:12 in namespace openshift: unable to find latest tagged image
         - s2i-nodejs-container
-        # The ImageStreamTag "php:7.3" is invalid: from: Error resolving ImageStreamTag php:7.3 in namespace openshift: unable to find latest tagged image
         - cakephp-ex
         - s2i-ruby-container
         - s2i-python-container
@@ -41,11 +39,13 @@
         - httpd-container
         - postgresql-container
         - mysql-container
+        - mariadb-container
         - nginx-container
-      when: github_repo is not defined
+        - django-ex
+      when: github_repo == ""
 
     - name: Clone and test only one upstream container repository
       include_tasks: ./tasks/clone_scl_repo.yml
       loop:
         - "{{ github_repo }}"
-      when: github_repo is defined
+      when: (github_repo is defined) and (github_repo != "")

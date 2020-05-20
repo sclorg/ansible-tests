@@ -23,16 +23,25 @@
   - name: Deploy testing container {{ item }} into openshift
     include_tasks: ./openshift_deploy.yml
 
-  - name: Test container {{ item }} in OpenShift 4.3 environment
+  - name: Test container {{ item }} in OpenShift 4.5 environment
     include_tasks: ./openshift_test.yml
     when: (route_cmd is defined) and (cluster_name.rc == 0)
 
   - name: Check oc get pods
     command: oc get pods
     register: oc_get_pods
+    changed_when: false
 
   - debug:
       var: oc_get_pods.stdout_lines
+
+  - name: Check cluster status
+    command: oc status
+    register: oc_status
+    changed_when: false
+
+  - debug:
+      var: oc_status.stdout_lines
 
   - name: oc delete all
     command: oc delete all,cm,secrets,pvc --all
@@ -45,4 +54,5 @@
   file:
     state: absent
     path: "{{ scl_dir }}"
+  changed_when: false
 
