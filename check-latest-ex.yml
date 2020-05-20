@@ -1,0 +1,37 @@
+---
+- name: Test RHSCL container images on OpenShift 4.X
+  hosts: localhost
+  vars:
+    testing_dir: "/tmp/rhscl_openshift_dir"
+    github_repo: "{{ lookup('env', 'GITHUB_REPO')}}"
+  tasks:
+    - name: Check temporary directory
+      block:
+        - name: Remove directory
+          file:
+            state: absent
+            path: "{{ testing_dir }}"
+        - name: Create temporary directory
+          file:
+            state: directory
+            path: "{{ testing_dir }}"
+
+    - block:
+      - name: Check if KUBECONFIG is defined
+        command: echo "$KUBECONFIG"
+        register: kube
+#      - name: check if kubeconfig is set
+#        assert:
+#          that:
+#          - kube.stdout != ""
+#          msg: "KUBECONFIG is not defined"
+#        changed_when: false
+#      ignore_errors: no
+
+    - name: Clone and test upstream container repositories
+      include_tasks: ./tasks/verify_ex_repo.yml
+      loop:
+        - "cakephp-ex"
+        - { name: "rails-ex", url: "s2i-ruby-container" }
+        - { name: "dancer-ex", url: "s2i-perl-container" }
+        - { name: "nginx_ex", url: "nginx-container" }

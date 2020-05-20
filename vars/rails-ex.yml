@@ -1,0 +1,5 @@
+url: "s2i-ruby-container"
+deployment: "oc new-app ruby:{{ version.stdout }}~https://github.com/sclorg/s2i-ruby-container.git --context-dir={{ version.stdout }}/test/puma-test-app/"
+pod_name: "s2i-ruby-container"
+add_route: true
+check_curl_output: "Hello world"

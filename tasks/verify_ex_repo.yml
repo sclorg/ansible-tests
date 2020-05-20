@@ -1,0 +1,35 @@
+- name: Set directory with cloned container {{ item }}
+  set_fact:
+    scl_dir: "{{ testing_dir }}/{{ item.name }}"
+
+- block:
+  - debug:
+      var: item.name
+
+  - debug:
+      var: item.url
+
+  - name: Clone {{ item.url }} repository
+    git:
+      repo: "https://github.com/sclorg/{{ item.url }}.git"
+      dest: "{{ scl_dir }}"
+      recursive: yes
+    changed_when: false
+
+  - name: Get latest version from Makefile
+    shell: "grep 'VERSIONS' {{ scl_dir }}/Makefile | rev | cut -d ' ' -f 1 | rev "
+    register: version
+
+  - debug:
+      var: version
+
+  - name: Check if Dockerfile.rhel7 is present in {{ version.stdout }} directory
+    file:
+      path: "{{ scl_dir }}/{{ version.stdout }}/Dockerfile.rhel7"
+      state: file
+
+- name: Remove cloned repository {{ item }}
+  file:
+    state: absent
+    path: "{{ scl_dir }}"
+
