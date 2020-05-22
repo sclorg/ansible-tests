@@ -1,3 +1,5 @@
 deployment: "oc process -f https://raw.githubusercontent.com/sclorg/nodejs-ex/master/openshift/templates/nodejs.json | oc apply -f -"
 pod_name: "nodejs-example"
 check_curl_output: "Welcome to your Node.js application on OpenShift"
+scl_url: "s2i-nodejs-container"
+is_name: "nodejs"

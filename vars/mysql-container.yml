@@ -10,3 +10,5 @@ pod_name: "my-mysql-rhel7"
 add_route: true
 test_exec_command: "./files/check_mysql_container.sh"
 expected_exec_result: "FINE"
+scl_url: "mysql-container"
+is_name: "mysql"

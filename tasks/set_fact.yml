@@ -1,0 +1,7 @@
+- name: Set directory with examples cloned container {{ item }}
+  set_fact:
+    scl_ex_dir: "{{ testing_dir }}/{{ item }}"
+
+- name: Set directory with cloned upstream SCL container {{ item }}
+  set_fact:
+    scl_dir: "{{ testing_dir }}/{{ stuff.scl_url }}"

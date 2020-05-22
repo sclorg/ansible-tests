@@ -1,0 +1,11 @@
+- block:
+  - debug:
+      var: stuff
+
+  - name: Load template json file {{ stuff.ex_openshift_path }}
+    include_vars:
+      file: "{{ scl_ex_dir }}/{{ stuff.ex_openshift_path }}"
+      name: os_variable
+
+  - fail:
+    when: os_variable.parameters[2].value != version.stdout

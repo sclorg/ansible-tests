@@ -10,3 +10,5 @@ pod_name: "my-mariadb-rhel7"
 add_route: true
 test_exec_command: "./files/check_mariadb_container.sh"
 expected_exec_result: "FINE"
+scl_url: "mariadb-container"
+is_name: "mariadb"

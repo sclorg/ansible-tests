@@ -1,0 +1,6 @@
+- name: Get latest version from Makefile
+  shell: "grep 'VERSIONS' {{ scl_dir }}/Makefile | rev | cut -d ' ' -f 1 | rev "
+  register: version
+
+- debug:
+    var: version
