@@ -1,0 +1,18 @@
+- debug:
+    var: scl_dir
+- debug:
+    var: stuff
+- debug:
+    var: version
+
+- name: Load template json file {{ stuff.is_name }}-{{ item }}.json
+  include_vars:
+    file: "{{ scl_dir }}/imagestreams/{{ stuff.is_name }}-{{ item }}.json"
+    name: os_variable
+
+# This checks second element of imagestream. First element 'latest'
+# sometimes does not contain proper tags.
+- name: Set failed flag for {{ stuff.is_name }}
+  set_fact:
+    streams_failed: "{{ streams_failed|default({}) | combine( {stuff.is_name: version.stdout} ) }}"
+  when: (os_variable.spec.tags[1].name != version.stdout)

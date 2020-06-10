@@ -1,0 +1,48 @@
+---
+- name: Test the latest imagestreams in repo
+  hosts: localhost
+  vars:
+    testing_dir: "/tmp/rhscl_openshift_dir"
+    github_repo: "{{ lookup('env', 'GITHUB_REPO')}}"
+  tasks:
+    - name: Check temporary directory
+      block:
+        - name: Remove directory
+          file:
+            state: absent
+            path: "{{ testing_dir }}"
+        - name: Create temporary directory
+          file:
+            state: directory
+            path: "{{ testing_dir }}"
+
+    - block:
+      - name: Check if KUBECONFIG is defined
+        command: echo "$KUBECONFIG"
+        register: kube
+#      - name: check if kubeconfig is set
+#        assert:
+#          that:
+#          - kube.stdout != ""
+#          msg: "KUBECONFIG is not defined"
+#        changed_when: false
+#      ignore_errors: no
+
+    - name: Set default fact
+      set_fact:
+        streams_failed: {}
+    - name: Clone and test upstream container repositories
+      include_tasks: ./tasks/verify_imagestreams.yml
+      loop:
+        - httpd-container
+        - mariadb-container
+        - mysql-container
+        - nginx-container
+        - postgresql-container
+        - s2i-nodejs-container
+        - s2i-perl-container
+        - s2i-python-container
+        - s2i-ruby-container
+    - fail:
+        msg: Wrong imagestreams {{ streams_failed }}
+      when: streams_failed|length != 0

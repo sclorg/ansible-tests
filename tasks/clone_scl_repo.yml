@@ -1,58 +1,6 @@
-- name: Check if container task {{ item }} exists
-  stat:
-    path: "./vars/{{ item }}.yml"
-  register: file_exists
-
-- name: Set directory with cloned container {{ item }}
-  set_fact:
-    scl_dir: "{{ testing_dir }}/{{ item }}"
-
-- block:
-  - name: Clone {{ item }} repository
-    git:
-      repo: 'https://github.com/sclorg/{{ item }}.git'
-      dest: "{{ scl_dir }}"
-      recursive: yes
-    changed_when: false
-
-  - name: Export environment variables for testing
-    include_vars:
-      file: ./vars/{{ item }}.yml
-      name: stuff
-
-  - name: Deploy testing container {{ item }} into openshift
-    include_tasks: ./openshift_deploy.yml
-
-  - name: Test container {{ item }} in OpenShift 4.5 environment
-    include_tasks: ./openshift_test.yml
-    when: (route_cmd is defined) and (cluster_name.rc == 0)
-
-  - name: Check oc get pods
-    command: oc get pods
-    register: oc_get_pods
-    changed_when: false
-
-  - debug:
-      var: oc_get_pods.stdout_lines
-
-  - name: Check cluster status
-    command: oc status
-    register: oc_status
-    changed_when: false
-
-  - debug:
-      var: oc_status.stdout_lines
-
-  - name: oc delete all
-    command: oc delete all,cm,secrets,pvc --all
-    changed_when: false
-
-
-  when: file_exists.stat.exists
-
-- name: Remove cloned repository {{ item }}
-  file:
-    state: absent
-    path: "{{ scl_dir }}"
+- name: Clone {{ stuff.scl_url }} repository
+  git:
+    repo: "https://github.com/sclorg/{{ stuff.scl_url }}.git"
+    dest: "{{ scl_dir }}"
+    recursive: yes
   changed_when: false
-

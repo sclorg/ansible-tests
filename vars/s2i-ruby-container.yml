@@ -2,3 +2,5 @@ deployment: "oc new-app ruby:2.5~https://github.com/sclorg/s2i-ruby-container.gi
 pod_name: "s2i-ruby-container"
 add_route: true
 check_curl_output: "Hello world"
+scl_url: "s2i-ruby-container"
+is_name: "ruby"

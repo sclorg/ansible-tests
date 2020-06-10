@@ -1,3 +1,5 @@
 deployment: "oc process -f https://raw.githubusercontent.com/sclorg/nginx-ex/master/openshift/templates/nginx.json | oc apply -f -"
 pod_name: "nginx-example"
 check_curl_output: "Welcome to your static nginx application"
+scl_url: "nginx-container"
+is_name: "nginx"

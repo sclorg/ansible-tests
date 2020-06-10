@@ -29,7 +29,7 @@
       ignore_errors: no
 
     - name: Clone and test upstream container repositories
-      include_tasks: ./tasks/clone_scl_repo.yml
+      include_tasks: ./tasks/verify_in_openshift.yml
       loop:
         - s2i-nodejs-container
         - cakephp-ex
@@ -45,7 +45,7 @@
       when: github_repo == ""
 
     - name: Clone and test only one upstream container repository
-      include_tasks: ./tasks/clone_scl_repo.yml
+      include_tasks: ./tasks/verify_in_openshift.yml
       loop:
         - "{{ github_repo }}"
       when: (github_repo is defined) and (github_repo != "")

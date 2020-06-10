@@ -1,0 +1,32 @@
+- name: Load vars for {{ item }} repository
+  include_vars:
+    file: ./vars/{{ item }}.yml
+    name: stuff
+
+- name: Set facts, scl dir and scl_ex_dir
+  include_tasks: ./set_fact.yml
+
+- name: Clone upstream and example repository
+  include_tasks: ./clone_scl_repo.yml
+
+- name: Get version from Makefile and check Dockerfile
+  include_tasks: ./get_version_check_dockerfile.yml
+
+- name: Check version against imagestream
+  include_tasks: ./imagestreams/check_imagestreams.yml
+  loop:
+    - rhel7
+    - centos7
+    - rhel7-ppc64le
+    - rhel7-s390x
+
+- block:
+  - name: Remove cloned repository {{ scl_dir }}
+    file:
+      state: absent
+      path: "{{ scl_dir }}"
+
+  - name: Remove cloned repository {{ scl_ex_dir }}
+    file:
+      state: absent
+      path: "{{ scl_ex_dir }}"
