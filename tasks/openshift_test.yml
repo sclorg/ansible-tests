@@ -15,9 +15,27 @@
     debug:
       var: curl_output
 
-  - fail:
-      msg: Output {{ stuff.check_curl_output }} is not present in curl command
+  - name: Set test was not successful
+    xml:
+      path: "{{ xml_file }}"
+      xpath: '/rhscl-testing/testsuite/testcase'
+      pretty_print: yes
+      add_children:
+        - test_result: "1"
+        - test_url: "{{ curl_output.url }}"
+        - test_msg: "{{ curl_output.msg }}"
     when: '"{{ stuff.check_curl_output }}" not in curl_output["content"]'
+
+  - name: Set test was successful
+    xml:
+      path: "{{ xml_file }}"
+      xpath: '/rhscl-testing/testsuite/testcase'
+      pretty_print: yes
+      add_children:
+        - test_result: "0"
+        - test_url: "{{ curl_output.url }}"
+        - test_msg: "{{ curl_output.msg }}"
+    when: '"{{ stuff.check_curl_output }}" in curl_output["content"]'
 
   when: (stuff.check_curl_output is defined)
 
@@ -30,9 +48,27 @@
     delay: 10
     until: command_out.rc == 0
 
-  - fail:
-      msg: Command {{ stuff.test_exec_command }} {{ cluster_name.stdout }} '{{ stuff.expected_exec_result }}'
+  - name: Set test was not successful
+    xml:
+      path: "{{ xml_file }}"
+      xpath: '/rhscl-testing/testsuite/testcase'
+      pretty_print: yes
+      add_children:
+        - test_result: "1"
+        - test_url: "{{ stuff.test_exec_command }}"
+        - test_msg: "{{ stuff.expected_exec_result }}"
     when: command_out.rc != 0
+
+  - name: Set test was successful
+    xml:
+      path: "{{ xml_file }}"
+      xpath: '/rhscl-testing/testsuite/testcase'
+      pretty_print: yes
+      add_children:
+        - test_result: "0"
+        - test_url: "{{ stuff.test_exec_command }}"
+        - test_msg: "{{ stuff.expected_exec_result }}"
+    when: command_out.rc == 0
 
   when: (stuff.test_exec_command is defined)
 

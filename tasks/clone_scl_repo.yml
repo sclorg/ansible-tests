@@ -4,3 +4,18 @@
     dest: "{{ scl_dir }}"
     recursive: yes
   changed_when: false
+
+- name: Set new child
+  xml:
+    path: "{{ xml_file }}"
+    xpath: /rhscl-testing/testsuite
+    pretty_print: yes
+    add_children:
+      - testcase: ""
+- name: Set name
+  xml:
+    path: "{{ xml_file }}"
+    xpath: /rhscl-testing/testsuite/testcase
+    pretty_print: yes
+    add_children:
+      - name: "{{ stuff.scl_url }}"
