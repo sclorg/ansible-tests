@@ -1,3 +1,4 @@
 deployment: "oc process -f https://raw.githubusercontent.com/sclorg/django-ex/master/openshift/templates/django.json | oc apply -f -"
 pod_name: "django-example"
 check_curl_output: "Welcome to your Django application on OpenShift"
+scl_url: "django-ex"

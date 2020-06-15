@@ -30,7 +30,7 @@ Nowadays, we are able to test these containers:
 
 The tests are executed by `ansible-playbook` command. Install it by `dnf` command:
 ```bash
-$ sudo dnf install -y ansible
+$ sudo dnf install -y ansible python3-lxml
 ```
 
 ### Download and install OpenShift Client 4

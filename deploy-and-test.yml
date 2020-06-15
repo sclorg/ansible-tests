@@ -4,8 +4,10 @@
   vars:
     testing_dir: "/tmp/rhscl_openshift_dir"
     github_repo: "{{ lookup('env', 'GITHUB_REPO')}}"
+    xml_file_name: "rhscl-testing-results.xml"
+    xml_file: "{{ testing_dir }}/{{ xml_file_name }}"
   tasks:
-    - name: Check temporary directory
+    - name: Check temporary directory and create XML unit file
       block:
         - name: Remove directory
           file:
@@ -16,6 +18,10 @@
             state: directory
             path: "{{ testing_dir }}"
 
+        - name: Copy results template file
+          copy:
+            src: ./vars/{{ xml_file_name }}
+            dest: "{{ xml_file }}"
     - block:
       - name: Check if KUBECONFIG is defined
         command: echo "$KUBECONFIG"
@@ -31,7 +37,7 @@
     - name: Clone and test upstream container repositories
       include_tasks: ./tasks/verify_in_openshift.yml
       loop:
-        - s2i-nodejs-container
+        - nodejs-ex
         - cakephp-ex
         - s2i-ruby-container
         - s2i-python-container

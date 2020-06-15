@@ -9,6 +9,10 @@
       file: ./vars/{{ item }}.yml
       name: stuff
 
+  - name: Set facts, scl dir and scl_ex_dir
+    include_tasks: ./set_fact.yml
+
+
   - name: Clone upstream repo
     include_tasks: ./clone_scl_repo.yml
 
@@ -17,7 +21,16 @@
 
   - name: Test container {{ item }} in OpenShift 4.5 environment
     include_tasks: ./openshift_test.yml
-    when: (route_cmd is defined) and (cluster_name.rc == 0)
+    when: (route_cmd is defined) and (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
+
+  - name: Write status of test
+    xml:
+      path: "{{ xml_file }}"
+      xpath: '/rhscl-testing/testsuite/testcase'
+      pretty_print: yes
+      add_children:
+        - test_result: "1"
+    when: deploy_cmd.rc != 0
 
   - name: Check oc get pods
     command: oc get pods

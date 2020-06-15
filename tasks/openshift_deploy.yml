@@ -6,17 +6,28 @@
     register: deploy_cmd
     ignore_errors: yes
 
+  - debug: var=deploy_cmd
+
+  - name: Set deploy was successful
+    xml:
+      path: "{{ xml_file }}"
+      xpath: '/rhscl-testing/testsuite/testcase'
+      pretty_print: yes
+      add_children:
+        - deploy: "{{ deploy_cmd.rc }}"
+
   - name: Check if POD {{ stuff.pod_name }} is running
     shell: "./files/check_pod_running.sh {{ stuff.pod_name }}"
     register: cluster_name
     until: cluster_name.rc == 0
     retries: 50
     delay: 10
-    ignore_errors: true
+    ignore_errors: yes
+    when: deploy_cmd.rc == 0
 
   - name: Expose route with name {{ stuff.pod_name }} for testing
     shell: "oc expose svc/{{ stuff.pod_name }} --name={{ stuff.pod_name }}"
-    when: (stuff.add_route is defined) and (cluster_name.rc == 0)
+    when: (stuff.add_route is defined) and (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
 
   - name: Check if POD {{ stuff.pod_name }} exposes route
     shell: "oc get routes --no-headers -o custom-columns=HOST:.spec.host | grep {{ stuff.pod_name }}"
@@ -25,6 +36,6 @@
     until: route_cmd.rc == 0
     retries: 10
     delay: 10
-    when: cluster_name.rc == 0
+    when: (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
 
   when: file_exists.stat.exists
