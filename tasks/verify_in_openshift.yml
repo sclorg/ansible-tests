@@ -2,12 +2,14 @@
   stat:
     path: "./vars/{{ item }}.yml"
   register: file_exists
+  delegate_to: localhost
 
 - block:
   - name: Export environment variables for testing
     include_vars:
       file: ./vars/{{ item }}.yml
       name: stuff
+    delegate_to: localhost
 
   - name: Set facts, scl dir and scl_ex_dir
     include_tasks: ./set_fact.yml

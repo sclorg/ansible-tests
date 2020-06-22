@@ -1,6 +1,6 @@
 ---
 - name: Test RHSCL container images on OpenShift 4.X
-  hosts: localhost
+  hosts: "{{ hosts | default('localhost') }}"
   vars:
     testing_dir: "/tmp/rhscl_openshift_dir"
     github_repo: "{{ lookup('env', 'GITHUB_REPO')}}"

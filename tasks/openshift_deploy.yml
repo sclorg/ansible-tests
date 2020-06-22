@@ -24,6 +24,7 @@
     delay: 10
     ignore_errors: yes
     when: deploy_cmd.rc == 0
+    delegate_to: localhost
 
   - name: Expose route with name {{ stuff.pod_name }} for testing
     shell: "oc expose svc/{{ stuff.pod_name }} --name={{ stuff.pod_name }}"
