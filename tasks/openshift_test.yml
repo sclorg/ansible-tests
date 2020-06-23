@@ -47,6 +47,7 @@
     retries: 10
     delay: 10
     until: command_out.rc == 0
+    delegate_to: localhost
 
   - name: Set test was not successful
     xml:
