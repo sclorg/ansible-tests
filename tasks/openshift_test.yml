@@ -41,13 +41,12 @@
 
 - block:
   - name: Running test in pod by oc exec
-    shell: "{{ stuff.test_exec_command }} {{ cluster_name.stdout }} '{{ stuff.expected_exec_result }}'"
+    script: "{{ stuff.test_exec_command }} {{ cluster_name.stdout | trim }} '{{ stuff.expected_exec_result }}'"
     ignore_errors: yes
     register: command_out
     retries: 10
     delay: 10
     until: command_out.rc == 0
-    delegate_to: localhost
 
   - name: Set test was not successful
     xml:
