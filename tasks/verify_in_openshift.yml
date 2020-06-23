@@ -14,6 +14,16 @@
   - name: Set facts, scl dir and scl_ex_dir
     include_tasks: ./set_fact.yml
 
+  - name: Get testsuite attributes
+    xml:
+      path: "{{ xml_file }}"
+      xpath: "{{ xml_testsuite_path }}"
+      content: attribute
+    register: testsuite_attributes
+
+  - name: Set fact for testsuite attributes
+    set_fact:
+      testsuite_attrs: "{{ testsuite_attributes.matches[0].testsuite }}"
 
   - name: Clone upstream repo
     include_tasks: ./clone_scl_repo.yml
@@ -25,14 +35,31 @@
     include_tasks: ./openshift_test.yml
     when: (route_cmd is defined) and (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
 
-  - name: Write status of test
+  - block:
+      - name: Write test case error elements
+        xml:
+          path: "{{ xml_file }}"
+          xpath: "{{ xml_testcase_path }}"
+          pretty_print: yes
+          add_children:
+            - error:
+                message: "Container deployment failed"
+            - system-err: "{{ deploy_cmd.stderr | trim }}"
+
+      - name: Increment testsuite errors attribute
+        xml:
+          path: "{{ xml_file }}"
+          xpath: "{{ xml_testsuite_path }}"
+          attribute: errors
+          value: "{{ testsuite_attrs.errors|int + 1 }}"
+    when: deploy_cmd.rc != 0
+
+  - name: Increment testsuite tests attribute
     xml:
       path: "{{ xml_file }}"
-      xpath: '/rhscl-testing/testsuite/testcase'
-      pretty_print: yes
-      add_children:
-        - test_result: "1"
-    when: deploy_cmd.rc != 0
+      xpath: "{{ xml_testsuite_path }}"
+      attribute: tests
+      value: "{{ testsuite_attrs.tests|int + 1 }}"
 
   - name: Check oc get pods
     command: oc get pods

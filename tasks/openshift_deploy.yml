@@ -8,14 +8,6 @@
 
   - debug: var=deploy_cmd
 
-  - name: Set deploy was successful
-    xml:
-      path: "{{ xml_file }}"
-      xpath: '/rhscl-testing/testsuite/testcase'
-      pretty_print: yes
-      add_children:
-        - deploy: "{{ deploy_cmd.rc }}"
-
   - name: Check if POD {{ stuff.pod_name }} is running
     script: "./files/check_pod_running.sh {{ stuff.pod_name }}"
     register: cluster_name
