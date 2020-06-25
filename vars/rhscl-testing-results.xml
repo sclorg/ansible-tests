@@ -1,5 +1,3 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rhscl-testing>
-    <testsuite>
-    </testsuite>
-</rhscl-testing>
+<testsuite name="rhscl-tests" errors="0" failures="0" skipped="0" tests="0">
+</testsuite>

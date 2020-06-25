@@ -6,6 +6,8 @@
     github_repo: "{{ lookup('env', 'GITHUB_REPO')}}"
     xml_file_name: "rhscl-testing-results.xml"
     xml_file: "{{ testing_dir }}/{{ xml_file_name }}"
+    xml_testsuite_path: "/testsuite"
+    xml_testcase_path: "{{ xml_testsuite_path }}/testcase"
   tasks:
     - name: Check temporary directory and create XML unit file
       block:
