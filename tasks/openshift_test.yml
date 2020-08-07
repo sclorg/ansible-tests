@@ -9,7 +9,7 @@
     delay: 10
     register: curl_output
     ignore_errors: yes
-    until: curl_output.status == 200
+    until: ("status" in curl_output) and (curl_output.status == 200)
 
   - name: Check proper output in json
     debug:

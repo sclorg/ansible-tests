@@ -1,0 +1,6 @@
+deployment: "oc new-app registry.access.redhat.com/ubi8/ruby-25~https://github.com/sclorg/s2i-ruby-container.git --context-dir=2.5/test/puma-test-app/"
+pod_name: "s2i-ruby-container"
+add_route: true
+check_curl_output: "Hello world"
+scl_url: "s2i-ruby-container"
+is_name: "ruby"

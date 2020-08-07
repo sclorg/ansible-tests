@@ -1,4 +1,4 @@
-- name: Deploying container {{ item }} into OpenShift 4.3 environment
+- name: Deploying container {{ item }} into OpenShift 4 environment
   block:
   - name: Deploy {{ item }}
     shell: "{{ stuff.deployment }}"

@@ -50,6 +50,11 @@
         - mariadb-container
         - nginx-container
         - django-ex
+        - s2i-perl-526-container-rhel8
+        - s2i-python-36-container-rhel8
+        - s2i-python-38-container-rhel8
+        - s2i-ruby-25-container-rhel8
+        - s2i-ruby-26-container-rhel8
       when: github_repo == ""
 
     - name: Clone and test only one upstream container repository
