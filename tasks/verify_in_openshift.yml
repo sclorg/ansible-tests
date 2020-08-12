@@ -31,7 +31,7 @@
   - name: Deploy testing container {{ item }} into openshift
     include_tasks: ./openshift_deploy.yml
 
-  - name: Test container {{ item }} in OpenShift 4.5 environment
+  - name: Test container {{ item }} in OpenShift 4 environment
     include_tasks: ./openshift_test.yml
     when: (route_cmd is defined) and (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
 

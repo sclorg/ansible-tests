@@ -1,6 +1,0 @@
-deployment: "oc new-app registry.access.redhat.com/ubi8/python-38~https://github.com/sclorg/s2i-python-container.git --context-dir=3.6/test/setup-test-app/"
-pod_name: "s2i-python-container"
-add_route: true
-check_curl_output: "Hello from gunicorn WSGI application"
-scl_url: "s2i-python-container"
-is_name: "python"
