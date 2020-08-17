@@ -1,0 +1,89 @@
+- name: Check if container task {{ item }} exists
+  stat:
+    path: "./vars/{{ item }}.yml"
+  register: file_exists
+  delegate_to: localhost
+
+- name: Export environment variables for testing
+  include_vars:
+    file: "./vars/{{ item }}.yml"
+    name: stuff
+  delegate_to: localhost
+
+- name: Set facts, scl dir and scl_ex_dir
+  include_tasks: ./tasks/set_fact.yml
+
+- name: Get testsuite attributes
+  xml:
+    path: "{{ xml_file }}"
+    xpath: "{{ xml_testsuite_path }}"
+    content: attribute
+  register: testsuite_attributes
+
+- name: Set fact for testsuite attributes
+  set_fact:
+    testsuite_attrs: "{{ testsuite_attributes.matches[0].testsuite }}"
+
+- name: Write test case element
+  xml:
+    path: "{{ xml_file }}"
+    xpath: "{{ xml_testsuite_path }}"
+    pretty_print: yes
+    add_children:
+      - testcase:
+          name: "{{ item }}"
+
+- name: Clone {{ stuff.git_url_to_clone }} repository
+  git:
+    repo: "{{ stuff.git_url_to_clone }}"
+    dest: "{{ scl_dir }}"
+    recursive: yes
+  changed_when: false
+
+- name: Comment xtf.config.master.* in file global-test.properties
+  replace:
+    path: "{{ scl_dir }}/global-test.properties"
+    regexp: '^(xtf.config.master.*)$'
+    replace: '# \1'
+
+- name: Comment xtf.openshift.* in file global-test.properties
+  replace:
+    path: "{{ scl_dir }}/global-test.properties"
+    regexp: '^(xtf.openshift.*)$'
+    replace: '# \1'
+
+- name: Create a namespace for testing xpaasqe
+  command: "oc new-project xpaasqe"
+  ignore_errors: yes
+
+- block:
+  - name: Run test for OpenJDK {{ stuff.version }} container
+    script: "{{ stuff.test_exec_command }} {{ scl_dir }} {{ stuff.version }}"
+    ignore_errors: yes
+    register: command_out
+
+  - debug: var=command_out
+
+  - name: Copy xUnit files to {{ testing_dir }}
+    copy:
+      src: "{{ scl_dir }}/test-openjdk/target/surefire-reports/{{ java_item }}"
+      dest: "{{ testing_dir }}/java-{{ stuff.version }}-{{ java_item }}"
+    with_items:
+      - TEST-com.redhat.xpaas.openjdk.image.DockerImageTest.xml
+      - TEST-com.redhat.xpaas.openjdk.maven.MavenJavaArgsTest.xml
+      - TEST-com.redhat.xpaas.openjdk.opts.JavaMemoryOptionsTest.xml
+      - TEST-com.redhat.xpaas.openjdk.s2i.springboot.SpringBootBuildTest.xml
+    loop_control:
+      loop_var: java_item
+
+- name: Delete a namespace as soon as tests are finished
+  command: "oc delete project xpaasqe"
+  register: oc_delete
+
+- debug: var=oc_delete
+
+- name: Remove cloned repository {{ scl_dir }}
+  file:
+    state: absent
+    path: "{{ scl_dir }}"
+  changed_when: false
