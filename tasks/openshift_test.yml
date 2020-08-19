@@ -4,7 +4,7 @@
       url: "http://{{ route_cmd.stdout }}"
       return_content: yes
       status_code: 200
-      body_format: json
+      body_format: "{{ stuff.curl_output_format | default('json') }}"
     retries: 10
     delay: 10
     register: curl_output

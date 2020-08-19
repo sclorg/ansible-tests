@@ -1,8 +1,4 @@
 - block:
-  - name: Pull image {{ stuff.registry_redhat_io }} from registry.redhat.io
-    shell: "docker pull registry.redhat.io/{{ stuff.registry_redhat_io }}"
-    changed_when: false
-
   - name: Import image {{ stuff.registry_redhat_io }} into OpenShift 4 environment
     shell: "oc import-image {{ stuff.tag_name }} --from=registry.redhat.io/{{ stuff.registry_redhat_io }}:latest --insecure=true --confirm"
     register: oc_import

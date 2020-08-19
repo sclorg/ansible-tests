@@ -4,5 +4,6 @@ deployment: "oc new-app perl:5.26~https://github.com/sclorg/s2i-perl-container.g
 pod_name: "s2i-perl-container"
 add_route: true
 check_curl_output: "Everything is fine"
+curl_output_format: "raw"
 scl_url: "s2i-perl-container"
 is_name: "perl"
