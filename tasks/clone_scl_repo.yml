@@ -12,4 +12,4 @@
     pretty_print: yes
     add_children:
       - testcase:
-          name: "{{ stuff.scl_url }}"
+          name: "{{ item }}"

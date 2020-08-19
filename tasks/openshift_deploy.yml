@@ -1,6 +1,13 @@
-- name: Deploying container {{ item }} into OpenShift 4.3 environment
-  block:
-  - name: Deploy {{ item }}
+- block:
+  - name: Import image {{ stuff.registry_redhat_io }} into OpenShift 4 environment
+    shell: "oc import-image {{ stuff.tag_name }} --from=registry.redhat.io/{{ stuff.registry_redhat_io }}:latest --insecure=true --confirm"
+    register: oc_import
+
+  - debug: var=oc_import
+  when: stuff.registry_redhat_io is defined
+
+- block:
+  - name: Deploying container {{ item }} into OpenShift 4 environment
     shell: "{{ stuff.deployment }}"
     changed_when: false
     register: deploy_cmd
@@ -29,5 +36,4 @@
     retries: 10
     delay: 10
     when: (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
-
   when: file_exists.stat.exists

@@ -4,12 +4,12 @@
       url: "http://{{ route_cmd.stdout }}"
       return_content: yes
       status_code: 200
-      body_format: json
+      body_format: "{{ stuff.curl_output_format | default('json') }}"
     retries: 10
     delay: 10
     register: curl_output
     ignore_errors: yes
-    until: curl_output.status == 200
+    until: ("status" in curl_output) and (curl_output.status == 200)
 
   - name: Check proper output in json
     debug:
@@ -32,7 +32,7 @@
           xpath: "{{ xml_testsuite_path }}"
           attribute: failures
           value: "{{ testsuite_attrs.failures|int + 1 }}"
-    when: '"{{ stuff.check_curl_output }}" not in curl_output["content"]'
+    when: (curl_output["content"] is not defined) or ("{{ stuff.check_curl_output }}" not in curl_output["content"])
 
   - name: Write test case passed elements
     xml:
