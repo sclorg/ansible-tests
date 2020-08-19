@@ -4,6 +4,7 @@
     dest: "{{ scl_dir }}"
     recursive: yes
   changed_when: false
+  when: (stuff.scl_url is defined)
 
 - name: Write test case element
   xml:
