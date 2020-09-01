@@ -1,5 +1,6 @@
-# Testing RHSCL containers on OpenShift 4.X
+# Testing containers by this repo on OpenShift 4.X
 
+## RHSCL containers
 We have several images in our GitHub namespace [https://github.com/sclorg/](https://github.com/sclorg/).
 We want to easy test all these images under an OpenShift 4.X environment and execute the basic use cases there
 whether those images running well in an OpenShift 4.X cluster (especially v4.3 and v4.4)
@@ -11,7 +12,7 @@ The playboook `deploy-and-test`.yml perform these actions:
 - test an image by variable `check_curl_output`
 - test and image by script defined in variable `test_exec_command` and check output defined by variable `expected_exec_result`
 
-## Tested containers
+### Tested containers
 
 Nowadays, we are able to test these containers:
 - s2i-nodejs-container
@@ -24,16 +25,16 @@ Nowadays, we are able to test these containers:
 - mysql-container
 - nginx-container
 
-## Prerequisities
+### Prerequisities
 
-### Install Fedora ansible-playbook package
+#### Install Fedora ansible-playbook package
 
 The tests are executed by `ansible-playbook` command. Install it by `dnf` command:
 ```bash
 $ sudo dnf install -y ansible python3-lxml
 ```
 
-### Download and install OpenShift Client 4
+#### Download and install OpenShift Client 4
 
 To test RHSCL image under OpenShift 4.X environment you have to download
 at least OpenShift Client v4.3. The steps below will install the latest OpenShift Client 4 version.
@@ -45,7 +46,7 @@ $ tar -xzvf ~/ocp4-client.tar.gz
 $ export PATH="${HOME}/ocp4-client:${PATH}"
 ```
 
-### Set KUBECONFIG
+#### Set KUBECONFIG
 
 Before running playbook you have to export KUBECONFIG variable, by a command:
 
@@ -53,7 +54,7 @@ Before running playbook you have to export KUBECONFIG variable, by a command:
 export KUBECONFIG=<path_to_directory>/kubeconfig
 ```
 
-## Test RHSCL containers under OpenShift 4.X
+### Test RHSCL containers under OpenShift 4.X
 
 Testing run by a command:
 ansible-playbook deploy-and-test.yml
@@ -76,3 +77,17 @@ In order to create a new test go through these steps.
 `expected_results`, `test_command_2`, `expected_results_2`.
 1. Add the newest test info `deploy-and-test.yaml` file, task `Clone and test upstream container repositories`
 1. For more examples, see already existing tests
+
+## Test java container by ansible-tests in OpenShift
+
+This repo can test Java containers under OpenShift 4 as well.
+
+Testing run by a command:
+
+ansible-playbook deploy-and-test.yml -e ext_test=verify_java
+
+or simply by make command:
+```bash
+make ocp4-tests EXT_TEST=verify_java
+```
+
