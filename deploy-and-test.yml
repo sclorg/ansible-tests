@@ -4,6 +4,7 @@
   vars:
     testing_dir: "/tmp/rhscl_openshift_dir"
     github_repo: "{{ lookup('env', 'GITHUB_REPO')}}"
+    ext_test: "{{ lookup('env', 'EXT_TEST') }}"
     xml_file_name: "rhscl-testing-results.xml"
     xml_file: "{{ testing_dir }}/{{ xml_file_name }}"
     xml_testsuite_path: "/testsuite"
@@ -50,20 +51,23 @@
         - rhel7-s2i-ruby-25-container
         - rhel7-s2i-python-36-container
         - rhel7-s2i-perl-526-container
-        - rhel7-dotnet21-container
-        - rhel7-dotnet31-container
         - rhel8-s2i-perl-526-container
         - rhel8-s2i-python-36-container
         #- rhel8-s2i-python-38-container Problem with deploying # error: the image match "python:3.8" for source repository "https://github.com/sclorg/s2i-python-container.git" does not appear to be a source-to-image builder.
         - rhel8-s2i-ruby-25-container
         #- rhel8-s2i-ruby-26-container Problem with deploying # error: the image match "ruby:2.6" for source repository "https://github.com/sclorg/s2i-ruby-container.git" does not appear to be a source-to-image builder.
         - rhel8-mysql-80-container
-        - rhel8-dotnet21-container
-        - rhel8-dotnet31-container
-      when: github_repo == ""
+      when: (github_repo == "") and (ext_test == "")
 
     - name: Clone and test only one upstream container repository
       include_tasks: ./tasks/verify_in_openshift.yml
       loop:
         - "{{ github_repo }}"
-      when: (github_repo is defined) and (github_repo != "")
+      when: (github_repo is defined) and (github_repo != "") and (ext_test == "")
+
+    - name: Check java container
+      include_tasks: ./plugins/{{ ext_test }}.yml
+      loop:
+        - java-8-container
+        - java-11-container
+      when: (ext_test is defined) and (ext_test != "")
