@@ -23,7 +23,7 @@
           pretty_print: yes
           add_children:
             - failure:
-                message: "Test failed"
+                message: "Check curl Test failed"
             - system-err: "{{ curl_output.msg | trim }}"
 
       - name: Increment testsuite failures attribute
@@ -62,7 +62,7 @@
           pretty_print: yes
           add_children:
             - failure:
-                message: "Test failed"
+                message: "In Pod Test failed"
             - system-err: "{{ command_out.stderr | trim }}"
 
       - name: Increment testsuite failures attribute

@@ -1,0 +1,9 @@
+registry_redhat_io: "dotnet/dotnet-31-rhel7"
+tag_name: "3.1"
+deployment: "oc new-app dotnet:3.1~https://github.com/redhat-developer/s2i-dotnetcore-ex#dotnetcore-3.1 --context-dir=app"
+pod_name: "s2i-dotnetcore-ex"
+add_route: true
+check_curl_output: "Web apps with ASP.NET Core"
+is_name: "dotnet"
+test_exec_command: "./files/check_oc_exec_output.sh 'dotnet --info'"
+expected_exec_result: "Version: 3.1"

@@ -91,3 +91,16 @@ or simply by make command:
 make ocp4-tests EXT_TEST=verify_java
 ```
 
+## Test dotnet container by ansible-tests in OpenShift
+
+This repo can test Dotnet containers under OpenShift 4 as well.
+
+Testing run by a command:
+
+ansible-playbook deploy-and-test.yml -e ext_test=dotnet
+
+or simply by make command:
+```bash
+make ocp4-tests EXT_TEST=dotnet
+```
+
