@@ -68,6 +68,7 @@
     copy:
       src: "{{ scl_dir }}/test-openjdk/target/surefire-reports/{{ java_item }}"
       dest: "{{ testing_dir }}/java-{{ stuff.version }}-{{ java_item }}"
+      remote_src: yes
     with_items:
       - TEST-com.redhat.xpaas.openjdk.image.DockerImageTest.xml
       - TEST-com.redhat.xpaas.openjdk.maven.MavenJavaArgsTest.xml
