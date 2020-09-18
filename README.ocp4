@@ -82,18 +82,32 @@ In order to create a new test go through these steps.
 
 This repo can test Java containers under OpenShift 4 as well.
 
+You can run all versions of Java or a specific one by setting one of the
+values for `ext_test` variable:
+
+* All Java versions: `ext_test=java`
+* Java 8: `ext_test=java_8`
+* Java 11: `ext_test=java_11`
+
 Testing run by a command:
 
-ansible-playbook deploy-and-test.yml -e ext_test=verify_java
+ansible-playbook deploy-and-test.yml -e ext_test=java
 
 or simply by make command:
 ```bash
-make ocp4-tests EXT_TEST=verify_java
+make ocp4-tests EXT_TEST=java
 ```
 
 ## Test dotnet container by ansible-tests in OpenShift
 
 This repo can test Dotnet containers under OpenShift 4 as well.
+
+You can run all versions of Dotnet or a specific one by setting one of the
+values for `ext_test` variable:
+
+* All Dotnet versions: `ext_test=dotnet`
+* Dotnet 21: `ext_test=dotnet_21`
+* Dotnet 31: `ext_test=dotnet_31`
 
 Testing run by a command:
 
