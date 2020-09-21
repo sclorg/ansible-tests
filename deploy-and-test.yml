@@ -9,6 +9,18 @@
     xml_file: "{{ testing_dir }}/{{ xml_file_name }}"
     xml_testsuite_path: "/testsuite"
     xml_testcase_path: "{{ xml_testsuite_path }}/testcase"
+    java_8:
+      - java-8-container
+    java_11:
+      - java-11-container
+    java: "{{ java_8 + java_11 }}"
+    dotnet_21:
+      - rhel7-dotnet21-container
+      - rhel8-dotnet21-container
+    dotnet_31:
+      - rhel7-dotnet31-container
+      - rhel8-dotnet31-container
+    dotnet: "{{ dotnet_21 + dotnet_31 }}"
   tasks:
     - name: Check temporary directory and create XML unit file
       block:
@@ -66,17 +78,13 @@
       when: (github_repo is defined) and (github_repo != "") and (ext_test == "")
 
     - name: Check java container
-      include_tasks: ./plugins/{{ ext_test }}.yml
-      loop:
-        - java-8-container
-        - java-11-container
-      when: (ext_test is defined) and (ext_test == "verify_java")
+      include_tasks: ./plugins/verify_java.yml
+      loop: "{{ lookup('vars', ext_test) }}"
+      when: (ext_test is defined) and (ext_test in
+        ["java", "java_8", "java_11"])
 
     - name: Check dotnet containers
       include_tasks: ./tasks/verify_in_openshift.yml
-      loop:
-        - rhel7-dotnet21-container
-        - rhel7-dotnet31-container
-        - rhel8-dotnet21-container
-        - rhel8-dotnet31-container
-      when: (ext_test is defined) and (ext_test == "dotnet")
+      loop: "{{ lookup('vars', ext_test) }}"
+      when: (ext_test is defined) and (ext_test in
+        ["dotnet", "dotnet_21", "dotnet_31"])
