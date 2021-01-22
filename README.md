@@ -2,8 +2,8 @@
 
 ## Testing RHSCL images in OpenShift 4.X environment
 
-[README.ocp4](./README.ocp4)
+[README_ocp4.md](./README_ocp4.md)
 
 ## Testing the latest versions in imagestreams
 
-[README.is](./README.is)
+[README_is.md](./README_is.md)
