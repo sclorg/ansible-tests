@@ -1,6 +1,6 @@
 registry_redhat_io: "rhel8/dotnet-21"
-tag_name: "2.1"
-deployment: "oc new-app dotnet:2.1~https://github.com/redhat-developer/s2i-dotnetcore-ex#dotnetcore-2.1 --context-dir=app"
+tag_name: "dotnet21"
+deployment: "oc new-app dotnet21:latest~https://github.com/redhat-developer/s2i-dotnetcore-ex#dotnetcore-2.1 --context-dir=app"
 pod_name: "s2i-dotnetcore-ex"
 add_route: true
 check_curl_output: "build ASP.NET apps"
