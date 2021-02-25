@@ -108,6 +108,7 @@ values for `ext_test` variable:
 * All Dotnet versions: `ext_test=dotnet`
 * Dotnet 21: `ext_test=dotnet_21`
 * Dotnet 31: `ext_test=dotnet_31`
+* Dotnet 50: `ext_test=dotnet_50`
 
 Testing run by a command:
 
