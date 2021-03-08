@@ -1,4 +1,4 @@
-deployment: "oc new-app mysql:8.0~https://github.com/sclorg/mysql-container.git \
+deployment: "oc new-app mysql:8.0-el7~https://github.com/sclorg/mysql-container.git \
 	--name my-mysql-rhel7 \
 	--context-dir=examples/extend-image \
 	--env MYSQL_OPERATIONS_USER=opuser \

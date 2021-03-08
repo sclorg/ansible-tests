@@ -1,6 +1,6 @@
 registry_redhat_io: "rhel8/perl-526"
 tag_name: "perl:5.26"
-deployment: "oc new-app perl:5.26~https://github.com/sclorg/s2i-perl-container.git --context-dir=5.26-mod_fcgid/test/sample-test-app/"
+deployment: "oc new-app perl:5.26-el8~https://github.com/sclorg/s2i-perl-container.git --context-dir=5.26-mod_fcgid/test/sample-test-app/"
 pod_name: "s2i-perl-container"
 add_route: true
 check_curl_output: "Everything is fine"

@@ -1,6 +1,6 @@
 registry_redhat_io: "rhel8/mysql-80"
 tag_name: "mysql:8.0"
-deployment: "oc new-app mysql:8.0~https://github.com/sclorg/mysql-container.git \
+deployment: "oc new-app mysql:8.0-el8~https://github.com/sclorg/mysql-container.git \
 	--name my-mysql-rhel8 \
 	--context-dir=examples/extend-image \
 	--env MYSQL_OPERATIONS_USER=opuser \
