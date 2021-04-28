@@ -1,4 +1,4 @@
-deployment: "oc new-app postgresql:10~https://github.com/sclorg/postgresql-container.git \
+deployment: "oc new-app postgresql:12~https://github.com/sclorg/postgresql-container.git \
       --name new-postgresql \
       --context-dir examples/extending-image/ \
       -e POSTGRESQL_USER=user \
