@@ -5,7 +5,7 @@
       return_content: yes
       status_code: 200
       body_format: "{{ stuff.curl_output_format | default('json') }}"
-    retries: 10
+    retries: 20
     delay: 10
     register: curl_output
     ignore_errors: yes
@@ -50,7 +50,7 @@
     script: "{{ stuff.test_exec_command }} {{ cluster_name.stdout | trim }} '{{ stuff.expected_exec_result }}'"
     ignore_errors: yes
     register: command_out
-    retries: 10
+    retries: 20
     delay: 10
     until: command_out.rc == 0
 
