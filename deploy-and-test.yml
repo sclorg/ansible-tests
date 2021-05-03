@@ -54,21 +54,28 @@
     - name: Clone and test upstream container repositories
       include_tasks: ./tasks/verify_in_openshift.yml
       loop:
-        - nodejs-ex
+        - nodejs-ex-12
+        - nodejs-ex-14
         - cakephp-ex
         - httpd-ex
-        - nginx-ex
+        - nginx-ex-116
+        - nginx-ex-118
         - django-ex
         - rhel7-postgresql-10-container
+        - rhel7-postgresql-12-container
         - rhel7-mysql-80-container
         - rhel7-mariadb-103-container
-        - rhel7-s2i-ruby-25-container
-        - rhel7-s2i-python-36-container
-        - rhel7-s2i-perl-526-container
+        - rhel7-s2i-perl-530-container
+        - rhel7-s2i-ruby-26-container
+        - rhel7-s2i-ruby-27-container
+        - rhel7-s2i-python-38-container
+        - rhel8-s2i-perl-530-container
         - rhel8-s2i-perl-526-container
         - rhel8-s2i-python-36-container
-        #- rhel8-s2i-python-38-container Problem with deploying # error: the image match "python:3.8" for source repository "https://github.com/sclorg/s2i-python-container.git" does not appear to be a source-to-image builder.
+        # - rhel8-s2i-python-38-container Problem with deploying # error: the image match "python:3.8" for source repository "https://github.com/sclorg/s2i-python-container.git" does not appear to be a source-to-image builder.
         - rhel8-s2i-ruby-25-container
+        - rhel8-postgresql-10-container
+        - rhel8-postgresql-12-container
         #- rhel8-s2i-ruby-26-container Problem with deploying # error: the image match "ruby:2.6" for source repository "https://github.com/sclorg/s2i-ruby-container.git" does not appear to be a source-to-image builder.
         - rhel8-mysql-80-container
       when: (github_repo == "") and (ext_test == "")
