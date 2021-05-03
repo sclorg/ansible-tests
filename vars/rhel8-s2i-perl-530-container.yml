@@ -1,4 +1,4 @@
-registry_redhat_io: "rhscl/perl-530-rhel7"
+registry_redhat_io: "ubi8/perl-530"
 tag_name: "perl:5.30"
 deployment: "oc new-app perl:5.30~https://github.com/sclorg/dancer-ex.git"
 pod_name: "dancer-ex"
