@@ -54,6 +54,8 @@
     delay: 10
     until: command_out.rc == 0
 
+  - debug: var=command_out
+
   - block:
       - name: Write test case failure elements
         xml:

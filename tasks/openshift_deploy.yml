@@ -24,6 +24,8 @@
     ignore_errors: yes
     when: deploy_cmd.rc == 0
 
+  - debug: var=cluster_name
+
   - name: Expose route with name {{ stuff.pod_name }} for testing
     shell: "oc expose svc/{{ stuff.pod_name }} --name={{ stuff.pod_name }}"
     when: (stuff.add_route is defined) and (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
