@@ -1,5 +1,0 @@
-deployment: "oc process -f https://raw.githubusercontent.com/sclorg/httpd-ex/master/openshift/templates/httpd.json | oc apply -f -"
-pod_name: "httpd-example"
-check_curl_output: "Welcome to your static httpd application"
-scl_url: "httpd-container"
-is_name: "httpd"
