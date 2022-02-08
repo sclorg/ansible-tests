@@ -1,4 +1,0 @@
-deployment: "oc process -f https://raw.githubusercontent.com/sclorg/cakephp-ex/master/openshift/templates/cakephp.json | oc apply -f -"
-pod_name: "cakephp-example"
-check_curl_output: "Welcome to your CakePHP application on OpenShift"
-scl_url: "cakephp-ex"

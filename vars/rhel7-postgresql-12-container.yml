@@ -1,4 +1,6 @@
-deployment: "oc new-app postgresql:12~https://github.com/sclorg/postgresql-container.git \
+registry_redhat_io: "rhscl/postgresql-12-rhel7"
+tag_name: "postgresql:12-el7"
+deployment: "oc new-app postgresql:12-el7~https://github.com/sclorg/postgresql-container.git \
       --name new-postgresql \
       --context-dir examples/extending-image/ \
       -e POSTGRESQL_USER=user \

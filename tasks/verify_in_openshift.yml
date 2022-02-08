@@ -25,6 +25,24 @@
     set_fact:
       testsuite_attrs: "{{ testsuite_attributes.matches[0].testsuite }}"
 
+  - name: Get list of projects
+    shell: "oc projects | grep rhscl-ci-testing"
+    changed_when: false
+    register: oc_projects
+    ignore_errors: yes
+
+  - debug: var=oc_projects
+
+  - block:
+      - name: Check if project {{ oc_project }} exists
+        shell: "oc project {{ oc_project }}"
+        ignore_errors: yes
+        register: oc_project_status
+
+      - name: Create project {{ oc_project }}
+        shell: "oc new-project {{ oc_project }}"
+        when: oc_project_status.rc != 0
+
   - name: Clone upstream repo
     include_tasks: ./clone_scl_repo.yml
 
@@ -78,7 +96,7 @@
       var: oc_status.stdout_lines
 
   - name: oc delete all
-    command: oc delete all,cm,secrets,pvc --all
+    command: oc delete all,cm,secrets,pvc --all --grace-period=0 --force
     changed_when: false
 
 

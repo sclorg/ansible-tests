@@ -1,7 +1,0 @@
-registry_redhat_io: "ubi7/nodejs-14"
-tag_name: "nodejs:14"
-deployment: "oc process -f https://raw.githubusercontent.com/sclorg/nodejs-ex/master/openshift/templates/nodejs.json -p NODEJS_VERSION=14 | oc apply -f -"
-pod_name: "nodejs-example"
-check_curl_output: "Welcome to your Node.js application on OpenShift"
-scl_url: "nodejs-ex"
-is_name: "nodejs"

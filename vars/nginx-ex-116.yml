@@ -1,7 +1,0 @@
-registry_redhat_io: "rhscl/nginx-116-rhel7"
-tag_name: "nginx:1.16"
-deployment: "oc process -f https://raw.githubusercontent.com/sclorg/nginx-ex/master/openshift/templates/nginx.json -p NGINX_VERSION=1.16 | oc apply -f -"
-pod_name: "nginx-example"
-check_curl_output: "Welcome to your static nginx application"
-scl_url: "nginx-container"
-is_name: "nginx"

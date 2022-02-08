@@ -1,6 +1,6 @@
 registry_redhat_io: "ubi8/perl-530"
-tag_name: "perl:5.30"
-deployment: "oc new-app perl:5.30~https://github.com/sclorg/dancer-ex.git"
+tag_name: "perl:5.30-ubi8"
+deployment: "oc new-app perl:5.30-ubi8~https://github.com/sclorg/dancer-ex.git"
 pod_name: "dancer-ex"
 add_route: true
 check_curl_output: "Welcome to your Dancer application"
