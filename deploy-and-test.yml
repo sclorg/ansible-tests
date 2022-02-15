@@ -85,6 +85,8 @@
         - rhel8-s2i-ruby-27-container
         - rhel8-s2i-ruby-30-container
         - rhel8-mysql-80-container
+        - rhel8-nginx-ex-118
+        - rhel8-nginx-ex-120
       when: (github_repo == "") and (ext_test == "")
 
     - name: Clone and test only one upstream container repository
