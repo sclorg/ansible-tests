@@ -66,7 +66,7 @@
         - rhel8-django-ex-python-36
         - rhel8-django-ex-python-38
         - rhel7-postgresql-10-container
-        - rhel7-postgresql-12-container
+        #- rhel7-postgresql-12-container
         - rhel7-mysql-80-container
         - rhel7-mariadb-103-container
         - rhel7-mariadb-105-container
