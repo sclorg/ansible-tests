@@ -88,6 +88,7 @@ values for `ext_test` variable:
 * All Java versions: `ext_test=java`
 * Java 8: `ext_test=java_8`
 * Java 11: `ext_test=java_11`
+* Java 17: `ext_test=java_17`
 
 Testing run by a command:
 

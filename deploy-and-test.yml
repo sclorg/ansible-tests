@@ -14,7 +14,9 @@
       - java-8-container
     java_11:
       - java-11-container
-    java: "{{ java_8 + java_11 }}"
+    java_17:
+      - java-17-container
+    java: "{{ java_8 + java_11 + java_17 }}"
     dotnet_31:
       - rhel7-dotnet31-container
       - rhel8-dotnet31-container
@@ -99,7 +101,7 @@
       include_tasks: ./plugins/verify_java.yml
       loop: "{{ lookup('vars', ext_test) }}"
       when: (ext_test is defined) and (ext_test in
-        ["java", "java_8", "java_11"])
+        ["java", "java_8", "java_11", "java_17"])
 
     - name: Check dotnet containers
       include_tasks: ./tasks/verify_in_openshift.yml
