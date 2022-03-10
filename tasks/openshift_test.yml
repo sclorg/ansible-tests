@@ -6,7 +6,7 @@
       status_code: 200
       body_format: "{{ stuff.curl_output_format | default('json') }}"
     retries: 20
-    delay: 10
+    delay: 20
     register: curl_output
     ignore_errors: yes
     until: ("status" in curl_output) and (curl_output.status == 200)
@@ -46,15 +46,25 @@
   when: (stuff.check_curl_output is defined)
 
 - block:
+  - debug: var=cluster_name
+
   - name: Running test in pod by oc exec
     script: "{{ stuff.test_exec_command }} {{ cluster_name.stdout | trim }} '{{ stuff.expected_exec_result }}'"
     ignore_errors: yes
     register: command_out
     retries: 20
-    delay: 10
+    delay: 20
     until: command_out.rc == 0
 
   - debug: var=command_out
+
+  - name: Check oc get pods
+    command: oc get pods
+    register: oc_get_pods
+    changed_when: false
+
+  - debug:
+      var: oc_get_pods.stdout_lines
 
   - block:
       - name: Write test case failure elements
