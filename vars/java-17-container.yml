@@ -1,0 +1,4 @@
+test_exec_command: "./files/check_java_container.sh"
+git_url_to_clone: "https://gitlab.cee.redhat.com/xpaas-qe/openjdk"
+scl_url: "openjdk"
+version: 17
