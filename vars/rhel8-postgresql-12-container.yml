@@ -1,12 +1,12 @@
 registry_redhat_io: "rhel8/postgresql-12"
 tag_name: "postgresql:12-el8"
 deployment: "oc new-app postgresql:12-el8~https://github.com/sclorg/postgresql-container.git \
-      --name new-postgresql \
+      --name rhel8-postgresql-12 \
       --context-dir examples/extending-image/ \
       -e POSTGRESQL_USER=user \
       -e POSTGRESQL_DATABASE=db \
       -e POSTGRESQL_PASSWORD=password"
-pod_name: "new-postgresql"
+pod_name: "rhel8-postgresql-12"
 add_route: true
 test_exec_command: "./files/check_postgresql_container.sh"
 expected_exec_result: "FINE"
