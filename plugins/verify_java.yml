@@ -77,6 +77,12 @@
     loop_control:
       loop_var: java_item
 
+  - name: Copy log directory to {{ testing_dir }}
+    copy:
+      src: "{{ scl_dir }}/test-openjdk/log"
+      dest: "{{ testing_dir }}/java-{{ stuff.version }}-logs"
+      remote_src: yes
+
 - name: Delete a namespace as soon as tests are finished
   command: "oc delete project xpaasqe"
   register: oc_delete
