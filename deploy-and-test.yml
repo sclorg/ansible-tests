@@ -20,11 +20,9 @@
     dotnet_31:
       - rhel7-dotnet31-container
       - rhel8-dotnet31-container
-    dotnet_50:
-      - rhel8-dotnet50-container
     dotnet_60:
       - rhel8-dotnet60-container
-    dotnet: "{{ dotnet_31 + dotnet_50 + dotnet_60}}"
+    dotnet: "{{ dotnet_31 + dotnet_60}}"
   tasks:
     - name: Check temporary directory and create XML unit file
       block:
@@ -107,4 +105,4 @@
       include_tasks: ./tasks/verify_in_openshift.yml
       loop: "{{ lookup('vars', ext_test) }}"
       when: (ext_test is defined) and (ext_test in
-        ["dotnet", "dotnet_31", "dotnet_50", "dotnet_60"])
+        ["dotnet", "dotnet_31", "dotnet_60"])
