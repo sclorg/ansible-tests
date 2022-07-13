@@ -1,0 +1,16 @@
+registry_redhat_io: "rhel8/mariadb-105"
+tag_name: "mariadb:10.5-el8"
+deployment: "oc new-app mariadb:10.5-el8~https://github.com/sclorg/mariadb-container.git \
+	--name rhel8-mariadb-105 \
+	--context-dir=examples/extend-image \
+	--env MYSQL_OPERATIONS_USER=opuser \
+	--env MYSQL_OPERATIONS_PASSWORD=oppass \
+	--env MYSQL_DATABASE=opdb \
+	--env MYSQL_USER=user \
+	--env MYSQL_PASSWORD=pass"
+pod_name: "rhel8-mariadb-105"
+add_route: true
+test_exec_command: "./files/check_mariadb_container.sh"
+expected_exec_result: "FINE"
+scl_url: "mariadb-container"
+is_name: "mariadb"
