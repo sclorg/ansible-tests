@@ -14,11 +14,11 @@ jobs:
       matrix:
         include:
           - context: "RHSCL InterOp tests"
-            test_name: "ocp4-test"
+            test_name: "ocp4-tests"
           - context: "Java InterOp Tests"
-            test_name: "ocp4-test EXT_TEST=java"
+            test_name: "ocp4-tests EXT_TEST=java"
           - context: "DotNet InterOp Tests"
-            test_name: "ocp4-test EXT_TEST=dotnet"
+            test_name: "ocp4-tests EXT_TEST=dotnet"
 
     if: |
       github.event.issue.pull_request
