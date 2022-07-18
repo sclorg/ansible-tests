@@ -1,0 +1,45 @@
+name: OpenShift tests by GitHub Action at Testing Farm
+
+on:
+  issue_comment:
+    types:
+      - created
+jobs:
+  build:
+    # This job only runs for '[test]' pull request comments by owner, member
+    name: OpenShift tests by GitHub Action on Testing Farm service
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - context: "RHSCL InterOp tests"
+            test_name: "ocp4-test"
+          - context: "Java InterOp Tests"
+            test_name: "ocp4-test EXT_TEST=java"
+          - context: "DotNet InterOp Tests"
+            test_name: "ocp4-test EXT_TEST=dotnet"
+
+    if: |
+      github.event.issue.pull_request
+      && contains(github.event.comment.body, '[test]')
+      && contains(fromJson('["OWNER", "MEMBER"]'), github.event.comment.author_association)
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          ref: "refs/pull/${{ github.event.issue.number }}/head"
+
+      # https://github.com/sclorg/testing-farm-as-github-action
+      - name: Schedule tests on external Testing Farm by Testing-Farm-as-github-action
+        id: github_action
+        uses: sclorg/testing-farm-as-github-action@v1
+        with:
+          api_key: ${{ secrets[TF_INTERNAL_API_KEY] }}
+          git_url: "https://gitlab.cee.redhat.com/platform-eng-core-services/sclorg-tmt-plans"
+          git_ref: "master"
+          tf_scope: "private"
+          tmt_plan_regex: "ansible-tests"
+          pull_request_status_name: ${{ matrix.context }}
+          variables: "REPO_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY;REPO_NAME=$GITHUB_REPOSITORY;PR_NUMBER=${{ github.event.issue.number }};TEST_NAME=${{ matrix.test_name }}"
+          compose: "RHEL-8.6.0-Nightly"
