@@ -35,7 +35,7 @@ jobs:
         id: github_action
         uses: sclorg/testing-farm-as-github-action@v1
         with:
-          api_key: ${{ secrets[TF_INTERNAL_API_KEY] }}
+          api_key: ${{ secrets.TF_INTERNAL_API_KEY }}
           git_url: "https://gitlab.cee.redhat.com/platform-eng-core-services/sclorg-tmt-plans"
           git_ref: "master"
           tf_scope: "private"
