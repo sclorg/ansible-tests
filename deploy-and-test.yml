@@ -9,7 +9,8 @@
     xml_file: "{{ testing_dir }}/{{ xml_file_name }}"
     xml_testsuite_path: "/testsuite"
     xml_testcase_path: "{{ xml_testsuite_path }}/testcase"
-    oc_project: "rhscl-ci-testing"
+    oc_project_rhscl: "rhscl-ci-testing"
+    oc_project_dotnet: "dotnet-ci-testing"
     java_8:
       - java-8-container
     java_11:

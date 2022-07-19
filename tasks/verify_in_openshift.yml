@@ -25,23 +25,46 @@
     set_fact:
       testsuite_attrs: "{{ testsuite_attributes.matches[0].testsuite }}"
 
-  - name: Get list of projects
+  - name: Get list of projects for RHSCL
     shell: "oc projects | grep rhscl-ci-testing"
     changed_when: false
     register: oc_projects
     ignore_errors: yes
+    when: (ext_test == "")
+
+  - name: Get list of projects for DOTNET
+    shell: "oc projects | grep dotnet-ci-testing"
+    changed_when: false
+    register: oc_projects
+    ignore_errors: yes
+    when: (ext_test is defined) and (ext_test in
+        ["dotnet", "dotnet_31", "dotnet_60"])
 
   - debug: var=oc_projects
 
   - block:
-      - name: Check if project {{ oc_project }} exists
+      - name: Check if project {{ oc_project_rhscl }} exists
         shell: "oc project {{ oc_project }}"
         ignore_errors: yes
         register: oc_project_status
 
-      - name: Create project {{ oc_project }}
-        shell: "oc new-project {{ oc_project }}"
+      - name: Create project {{ oc_project_rhscl }}
+        shell: "oc new-project {{ oc_project_rhscl }}"
         when: oc_project_status.rc != 0
+    when: (ext_test == "")
+
+  - block:
+      - name: Check if project {{ oc_project_dotnet }} exists
+        shell: "oc project {{ oc_project_dotnet }}"
+        ignore_errors: yes
+        register: oc_project_status
+
+      - name: Create project {{ oc_project_dotnet }}
+        shell: "oc new-project {{ oc_project_dotnet }}"
+        when: oc_project_status.rc != 0
+
+    when: (ext_test is defined) and (ext_test in
+        ["dotnet", "dotnet_31", "dotnet_60"])
 
   - name: Clone upstream repo
     include_tasks: ./clone_scl_repo.yml
