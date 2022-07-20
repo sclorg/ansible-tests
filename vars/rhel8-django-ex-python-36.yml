@@ -1,6 +1,6 @@
 registry_redhat_io: "ubi8/python-36"
 tag_name: "python:3.6-ubi8"
-deployment: "oc process -f https://raw.githubusercontent.com/sclorg/django-ex/3.2.x/openshift/templates/django.json -p PYTHON_VERSION=3.6-ubi8 -p NAMESPACE={{ oc_project }} | oc apply -f -"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/django-ex/3.2.x/openshift/templates/django.json -p PYTHON_VERSION=3.6-ubi8 -p NAMESPACE={{ oc_project_rhscl }} | oc apply -f -"
 pod_name: "django-example"
 check_curl_output: "Welcome to your Django application on OpenShift"
 scl_url: "django-ex"
