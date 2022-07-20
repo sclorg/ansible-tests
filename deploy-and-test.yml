@@ -88,7 +88,7 @@
         - rhel8-mysql-80-container
         - rhel8-nginx-ex-118
         - rhel8-nginx-ex-120
-        #- rhel9-httpd-ex -- missing in https://github.com/sclorg/httpd-ex issue is here: https://github.com/sclorg/httpd-ex/issues/35
+        - rhel9-httpd-ex
         - rhel9-mariadb-105-container
         - rhel9-mysql-80-container
         - rhel9-nginx-ex-120

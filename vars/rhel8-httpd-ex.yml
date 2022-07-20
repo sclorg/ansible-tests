@@ -1,6 +1,6 @@
 registry_redhat_io: "rhel8/httpd-24"
 tag_name: "httpd:2.4-el8"
-deployment: "oc process -f https://raw.githubusercontent.com/sclorg/httpd-ex/master/openshift/templates/httpd.json -p NAMESPACE={{ oc_project_rhscl }} | oc apply -f -"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/httpd-ex/master/openshift/templates/httpd.json -p VERSION=2.4-el8 -p NAMESPACE={{ oc_project_rhscl }} | oc apply -f -"
 pod_name: "httpd-example"
 check_curl_output: "Welcome to your static httpd application"
 scl_url: "httpd-container"
