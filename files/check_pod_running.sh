@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -x
 POD_NAME="$1"
 test -z "${POD_NAME}" && echo "pod_name variable is not defined in yml" && exit 1
 
