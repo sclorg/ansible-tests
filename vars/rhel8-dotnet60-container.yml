@@ -6,4 +6,4 @@ add_route: true
 check_curl_output: "Web apps with ASP.NET Core"
 is_name: "dotnet"
 test_exec_command: "./files/check_oc_exec_output.sh 'dotnet --info'"
-expected_exec_result: "Version: 6.0"
+expected_exec_result: "Version:*6.0"
