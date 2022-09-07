@@ -1,4 +1,4 @@
-# Set of ansible playbooks for various testing
+# Set of ansible playbooks for various testing - test
 
 ## Testing RHSCL images in OpenShift 4.X environment
 
