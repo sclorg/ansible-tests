@@ -38,7 +38,7 @@
     register: oc_projects
     ignore_errors: yes
     when: (ext_test is defined) and (ext_test in
-        ["dotnet", "dotnet_31", "dotnet_60"])
+        ["dotnet", "dotnet_31", "dotnet_60", "dotnet_70"])
 
   - debug: var=oc_projects
 
@@ -64,7 +64,7 @@
         when: oc_project_status.rc != 0
 
     when: (ext_test is defined) and (ext_test in
-        ["dotnet", "dotnet_31", "dotnet_60"])
+        ["dotnet", "dotnet_31", "dotnet_60", "dotnet_70"])
 
   - name: Clone upstream repo
     include_tasks: ./clone_scl_repo.yml
