@@ -1,0 +1,6 @@
+registry_redhat_io: "ubi8/php-81"
+tag_name: "php:8.1-ubi8"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/cakephp-ex/master/openshift/templates/cakephp.json -p PHP_VERSION=8.1-ubi8 -p NAMESPACE=rhscl-ci-testing | oc apply -f -"
+pod_name: "cakephp-example"
+check_curl_output: "Welcome to your CakePHP application on OpenShift"
+scl_url: "cakephp-ex"
