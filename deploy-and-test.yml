@@ -18,14 +18,11 @@
     java_17:
       - java-17-container
     java: "{{ java_8 + java_11 + java_17 }}"
-    dotnet_31:
-      - rhel7-dotnet31-container
-      - rhel8-dotnet31-container
     dotnet_60:
       - rhel8-dotnet60-container
     dotnet_70:
       - rhel8-dotnet70-container
-    dotnet: "{{ dotnet_31 + dotnet_60 + dotnet_70}}"
+    dotnet: "{{ dotnet_60 + dotnet_70}}"
   tasks:
     - name: Check temporary directory and create XML unit file
       block:
@@ -117,4 +114,4 @@
       include_tasks: ./tasks/verify_in_openshift.yml
       loop: "{{ lookup('vars', ext_test) }}"
       when: (ext_test is defined) and (ext_test in
-        ["dotnet", "dotnet_31", "dotnet_60", "dotnet_70"])
+        ["dotnet", "dotnet_60", "dotnet_70"])

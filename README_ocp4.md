@@ -107,7 +107,6 @@ You can run all versions of Dotnet or a specific one by setting one of the
 values for `ext_test` variable:
 
 * All Dotnet versions: `ext_test=dotnet`
-* Dotnet 31: `ext_test=dotnet_31`
 * Dotnet 60: `ext_test=dotnet_60`
 * Dotnet 70: `ext_test=dotnet_70`
 
