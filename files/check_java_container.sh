@@ -8,5 +8,5 @@ test -z "${VERSION}" && echo "Second argument as version has to be specified" &&
 
 PWD=`pwd`
 cd "${DIR_NAME}"
-MAVEN_HOME=/usr/bin/  mvn clean test -P "${VERSION}" -P smoke -Dmaven.home=/usr/bin/
+bash run.sh --jdk-version="${VERSION}"
 cd "${PWD}"
