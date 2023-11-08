@@ -55,7 +55,6 @@
       include_tasks: ./tasks/verify_in_openshift.yml
       loop:
         - rhel7-nodejs-ex-14
-        - rhel7-nginx-ex-118
         - rhel7-nginx-ex-120
         - rhel7-postgresql-10-container
         - rhel7-mysql-80-container
@@ -75,7 +74,6 @@
         - rhel8-django-ex-python-38
         - rhel8-mariadb-105-container
         - rhel8-s2i-perl-532-container
-        - rhel8-s2i-perl-530-container
         - rhel8-s2i-perl-526-container
         - rhel8-s2i-python-36-container
         - rhel8-s2i-python-39-container
@@ -89,7 +87,6 @@
         - rhel8-s2i-ruby-30-container
         - rhel8-s2i-ruby-31-container
         - rhel8-mysql-80-container
-        - rhel8-nginx-ex-120
         - rhel8-nginx-ex-122
         - rhel9-httpd-ex
         - rhel9-mariadb-105-container
