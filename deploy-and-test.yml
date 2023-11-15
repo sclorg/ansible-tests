@@ -65,6 +65,7 @@
         - rhel7-s2i-python-38-container
         - rhel8-nodejs-ex-16
         - rhel8-nodejs-ex-18
+        - rhel8-nodejs-ex-18-minimal
         - rhel8-cakephp-ex-73
         - rhel8-cakephp-ex-74
         #- rhel8-cakephp-ex-80 It looks like no prepared for PHP-8.0
@@ -94,6 +95,7 @@
         - rhel9-nginx-ex-122
         - rhel9-nodejs-ex-16
         - rhel9-nodejs-ex-18
+        - rhel9-nodejs-ex-18-minimal
         - rhel9-nodejs-ex-20
         - rhel9-nodejs-ex-20-minimal
         - rhel9-postgresql-13-container
