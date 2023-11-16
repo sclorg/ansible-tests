@@ -66,6 +66,8 @@
         - rhel8-nodejs-ex-16
         - rhel8-nodejs-ex-18
         - rhel8-nodejs-ex-18-minimal
+        - rhel8-nodejs-ex-20
+        - rhel8-nodejs-ex-20-minimal
         - rhel8-cakephp-ex-73
         - rhel8-cakephp-ex-74
         #- rhel8-cakephp-ex-80 It looks like no prepared for PHP-8.0
