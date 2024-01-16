@@ -10,8 +10,8 @@ RUN microdnf update -y --nodocs --setopt=install_weak_deps=0 --setopt=*.excludep
   && microdnf install wget
 
 WORKDIR /usr/local/bin
-RUN wget https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz \
-    && tar xvf oc.tar.gz
+RUN wget -q https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz \
+  && tar xvf openshift-client-linux.tar.gz
 
 RUN mkdir -p /tmp/tests/ansible-tests
 WORKDIR /tmp/tests/ansible-tests
