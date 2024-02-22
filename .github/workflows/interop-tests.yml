@@ -13,8 +13,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - context: "RHSCL InterOp tests"
-            test_name: "ocp4-tests"
+          - context: "RHSCL InterOp NonS2I tests"
+            test_name: "ocp4-tests EXT_TEST=nos2i"
+          - context: "RHSCL InterOp S2I tests"
+            test_name: "ocp4-tests EXT_TEST=s2i"
           - context: "Java InterOp Tests"
             test_name: "ocp4-tests EXT_TEST=java"
           - context: "DotNet InterOp Tests"
