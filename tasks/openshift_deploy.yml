@@ -38,4 +38,6 @@
     retries: 10
     delay: 20
     when: (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
+
+  - debug: var=route_cmd
   when: file_exists.stat.exists

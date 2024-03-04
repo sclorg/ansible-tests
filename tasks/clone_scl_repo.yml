@@ -1,6 +1,6 @@
 - name: Clone {{ stuff.scl_url }} repository
   git:
-    repo: "https://github.com/sclorg/{{ stuff.scl_url }}.git"
+    repo: "https://github.com/sclorg/{{ stuff.scl_url }}"
     dest: "{{ scl_dir }}"
     recursive: yes
   changed_when: false

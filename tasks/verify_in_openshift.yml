@@ -26,11 +26,11 @@
       testsuite_attrs: "{{ testsuite_attributes.matches[0].testsuite }}"
 
   - name: Get list of projects for RHSCL
-    shell: "oc projects | grep rhscl-ci-testing"
+    shell: "oc projects | grep {{ oc_project_rhscl }}"
     changed_when: false
     register: oc_projects
     ignore_errors: yes
-    when: (ext_test == "")
+    when: (ext_test == "") or (ext_test == "s2i") or (ext_test == "nos2i")
 
   - name: Get list of projects for DOTNET
     shell: "oc projects | grep dotnet-ci-testing"
@@ -121,6 +121,7 @@
   - name: oc delete all
     command: oc delete all,cm,secrets,pvc --all --grace-period=0 --force
     changed_when: false
+    ignore_errors: yes
 
 
   when: file_exists.stat.exists
