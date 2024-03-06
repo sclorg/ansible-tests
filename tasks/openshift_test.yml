@@ -1,4 +1,6 @@
 - block:
+  - debug: var=stuff
+
   - name: Check curl command is working
     uri:
       url: "http://{{ route_cmd.stdout }}"
