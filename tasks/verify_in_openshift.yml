@@ -51,7 +51,7 @@
       - name: Create project {{ oc_project_rhscl }}
         shell: "oc new-project {{ oc_project_rhscl }}"
         when: oc_project_status.rc != 0
-    when: (ext_test == "")
+    when: (ext_test == "") or (ext_test == "s2i") or (ext_test == "nos2i")
 
   - block:
       - name: Check if project {{ oc_project_dotnet }} exists
