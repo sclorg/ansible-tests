@@ -73,7 +73,6 @@
         #- rhel7-s2i-perl-530-container
         - rhel7-s2i-ruby-30-container
         - rhel7-s2i-python-38-container
-        - rhel8-nodejs-ex-16
         - rhel8-nodejs-ex-18
         - rhel8-nodejs-ex-18-minimal
         - rhel8-nodejs-ex-20
@@ -103,7 +102,6 @@
         - rhel9-mariadb-105-container
         - rhel9-mysql-80-container
         - rhel9-nginx-ex-122
-        - rhel9-nodejs-ex-16
         - rhel9-nodejs-ex-18
         - rhel9-nodejs-ex-18-minimal
         - rhel9-nodejs-ex-20
@@ -154,7 +152,6 @@
         #- rhel7-s2i-perl-530-container
         - rhel7-s2i-ruby-30-container
         - rhel7-s2i-python-38-container
-        - rhel8-nodejs-ex-16
         - rhel8-nodejs-ex-18
         - rhel8-nodejs-ex-18-minimal
         - rhel8-nodejs-ex-20
@@ -174,7 +171,6 @@
         - rhel8-s2i-ruby-25-container
         - rhel8-s2i-ruby-31-container
         - rhel8-s2i-ruby-33-container
-        - rhel9-nodejs-ex-16
         - rhel9-nodejs-ex-18
         - rhel9-nodejs-ex-18-minimal
         - rhel9-nodejs-ex-20
