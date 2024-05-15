@@ -14,13 +14,13 @@ jobs:
       matrix:
         include:
           - context: "RHSCL InterOp NonS2I tests"
-            test_name: "ocp4-tests EXT_TEST=nos2i"
+            ext_test: "nons2i"
           - context: "RHSCL InterOp S2I tests"
-            test_name: "ocp4-tests EXT_TEST=s2i"
+            ext_test: "s2i"
           - context: "Java InterOp Tests"
-            test_name: "ocp4-tests EXT_TEST=java"
+            ext_test: "java"
           - context: "DotNet InterOp Tests"
-            test_name: "ocp4-tests EXT_TEST=dotnet"
+            ext_test: "dotnet"
 
     if: |
       github.event.issue.pull_request
@@ -43,5 +43,5 @@ jobs:
           tf_scope: "private"
           tmt_plan_regex: "ansible-tests"
           pull_request_status_name: ${{ matrix.context }}
-          variables: "REPO_URL=${{ github.server_url }}/${{ github.repository }};REPO_NAME=${{ github.repository }};PR_NUMBER=${{ github.event.issue.number }};TEST_NAME=${{ matrix.test_name }}"
+          variables: "REPO_URL=${{ github.server_url }}/${{ github.repository }};REPO_NAME=${{ github.repository }};PR_NUMBER=${{ github.event.issue.number }};TEST_NAME=ocp4-tests;EXT_TEST=${{ matrix.ext_test }}"
           compose: "RHEL-8.8.0-Nightly"
