@@ -1,6 +1,6 @@
 registry_redhat_io: "rhel8/python-312"
 tag_name: "python:3.12-el8"
-deployment: "oc new-app python:3.12-el9~https://github.com/sclorg/s2i-python-container.git --context-dir=3.12/test/setup-test-app/"
+deployment: "oc new-app python:3.12-el8~https://github.com/sclorg/s2i-python-container.git --context-dir=3.12/test/setup-test-app/"
 pod_name: "s2i-python-container"
 add_route: true
 check_curl_output: "Hello from gunicorn WSGI application"
