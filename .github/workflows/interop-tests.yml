@@ -43,5 +43,6 @@ jobs:
           tf_scope: "private"
           tmt_plan_regex: "ansible-tests"
           pull_request_status_name: ${{ matrix.context }}
+          update_pull_request_status: true
           variables: "REPO_URL=${{ github.server_url }}/${{ github.repository }};REPO_NAME=${{ github.repository }};PR_NUMBER=${{ github.event.issue.number }};TEST_NAME=ocp4-tests;EXT_TEST=${{ matrix.ext_test }}"
           compose: "RHEL-8.8.0-Nightly"
