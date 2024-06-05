@@ -13,8 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - context: "RHSCL InterOp NonS2I tests"
-            ext_test: "nons2i"
+          - context: "RHSCL InterOp NoS2I tests"
+            ext_test: "nos2i"
           - context: "RHSCL InterOp S2I tests"
             ext_test: "s2i"
           - context: "Java InterOp Tests"
