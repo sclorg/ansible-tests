@@ -24,6 +24,8 @@
       - rhel8-dotnet70-container
     dotnet: "{{ dotnet_60 + dotnet_70}}"
   tasks:
+    - debug: var=ext_test
+    - debug: var=github_repo
     - name: Modify OpenShift project to rhscl-ci-testing-s2i if s2i
       set_fact:
         oc_project_rhscl: "{{ oc_project_rhscl }}-s2i"
