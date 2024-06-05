@@ -9,8 +9,8 @@
     xml_file: "{{ testing_dir }}/{{ xml_file_name }}"
     xml_testsuite_path: "/testsuite"
     xml_testcase_path: "{{ xml_testsuite_path }}/testcase"
-    oc_project_rhscl: "rhscl-ci-testing"
-    oc_project_dotnet: "dotnet-ci-testing"
+    oc_project_rhscl: "core-services-ocp--rhscl-ci"
+    oc_project_dotnet: "core-services-ocp--dotnet-ci"
     java_8:
       - java-8-container
     java_11:
@@ -64,15 +64,6 @@
     - name: Clone and test upstream container repositories
       include_tasks: ./tasks/verify_in_openshift.yml
       loop:
-        #- rhel7-nodejs-ex-14
-        - rhel7-nginx-ex-120
-        - rhel7-postgresql-10-container
-        - rhel7-mysql-80-container
-        - rhel7-mariadb-103-container
-        - rhel7-mariadb-105-container
-        #- rhel7-s2i-perl-530-container
-        - rhel7-s2i-ruby-30-container
-        - rhel7-s2i-python-38-container
         - rhel8-nodejs-ex-18
         - rhel8-nodejs-ex-18-minimal
         - rhel8-nodejs-ex-20
@@ -128,11 +119,6 @@
     - name: Check None-s2i containers
       include_tasks: ./tasks/verify_in_openshift.yml
       loop:
-        - rhel7-nginx-ex-120
-        - rhel7-postgresql-10-container
-        - rhel7-mysql-80-container
-        - rhel7-mariadb-103-container
-        - rhel7-mariadb-105-container
         - rhel8-httpd-ex
         - rhel8-mariadb-105-container
         - rhel8-mariadb-1011-container

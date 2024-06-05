@@ -1,6 +1,6 @@
 registry_redhat_io: "ubi7/nodejs-14"
 tag_name: "nodejs:14"
-deployment: "oc process -f https://raw.githubusercontent.com/sclorg/nodejs-ex/master/openshift/templates/nodejs.json -p NODEJS_VERSION=14 -p NAMESPACE={{ oc_project_rhscl }} | oc apply -f -"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/nodejs-ex/master/openshift/templates/nodejs.json --name=nodejs-example -p NODEJS_VERSION=14 -p NAMESPACE={{ oc_project_rhscl }} | oc apply -f -"
 pod_name: "nodejs-example"
 check_curl_output: "Node.js Crud Application"
 scl_url: "nodejs-ex"

@@ -19,8 +19,8 @@
     script: "./files/check_pod_running.sh {{ stuff.pod_name }}"
     register: cluster_name
     until: cluster_name.rc == 0
-    retries: 40
-    delay: 30
+    retries: 60
+    delay: 10
     ignore_errors: yes
     when: deploy_cmd.rc == 0
 
@@ -35,9 +35,21 @@
     changed_when: false
     register: route_cmd
     until: route_cmd.rc == 0
+    retries: 40
+    delay: 5
+    when: (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
+
+  - debug: var=route_cmd
+
+  - name: Check service IP for  POD {{ stuff.pod_name }}
+    shell: "oc get svc/{{ stuff.pod_name }} --no-headers -o custom-columns=HOST:.spec.clusterIP"
+    changed_when: false
+    register: service_ip
+    until: service_ip.rc == 0
     retries: 10
     delay: 20
     when: (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
 
-  - debug: var=route_cmd
+  - debug: var=service_ip
+
   when: file_exists.stat.exists
