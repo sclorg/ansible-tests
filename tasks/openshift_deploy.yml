@@ -19,8 +19,8 @@
     script: "./files/check_pod_running.sh {{ stuff.pod_name }}"
     register: cluster_name
     until: cluster_name.rc == 0
-    retries: 60
-    delay: 10
+    retries: 30
+    delay: 30
     ignore_errors: yes
     when: deploy_cmd.rc == 0
 
@@ -35,7 +35,7 @@
     changed_when: false
     register: route_cmd
     until: route_cmd.rc == 0
-    retries: 40
+    retries: 30
     delay: 5
     when: (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
 

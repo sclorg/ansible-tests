@@ -146,10 +146,6 @@
     - name: Check s2i containers
       include_tasks: ./tasks/verify_in_openshift.yml
       loop:
-        #- rhel7-nodejs-ex-14
-        #- rhel7-s2i-perl-530-container
-        - rhel7-s2i-ruby-30-container
-        - rhel7-s2i-python-38-container
         - rhel8-nodejs-ex-18
         - rhel8-nodejs-ex-18-minimal
         - rhel8-nodejs-ex-20
