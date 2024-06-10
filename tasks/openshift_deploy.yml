@@ -36,7 +36,7 @@
     register: route_cmd
     until: route_cmd.rc == 0
     retries: 30
-    delay: 5
+    delay: 10
     when: (deploy_cmd.rc == 0) and (cluster_name.rc == 0)
 
   - debug: var=route_cmd

@@ -4,11 +4,11 @@
 
   - name: Check if curl command is working
     script: "./files/check_oc_exec_output.sh 'curl {{ service_ip.stdout | trim }}:8080' '{{ cluster_name.stdout | trim }}' '{{ stuff.check_curl_output }}'"
-    retries: 5
+    retries: 10
     delay: 20
     register: curl_output
     ignore_errors: yes
-    until: curl_output.rc == 0
+    until: (curl_output.rc == 0) and ("Connection refused" not in curl_output["stderr"])
 #  - name: Check curl command is working
 #    uri:
 #      url: "http://{{ route_cmd.stdout }}"
