@@ -24,6 +24,6 @@ for i in {1..10}; do
       exit 1
     fi
   done <<< "${POD_STATUS}"
-  sleep 60
+  sleep 30
 done
 exit 1

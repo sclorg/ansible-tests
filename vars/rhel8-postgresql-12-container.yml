@@ -1,12 +1,11 @@
 registry_redhat_io: "rhel8/postgresql-12"
 tag_name: "postgresql:12-el8"
-deployment: "oc new-app postgresql:12-el8~https://github.com/sclorg/postgresql-container.git \
-      --name rhel8-postgresql-12 \
-      --context-dir examples/extending-image/ \
-      -e POSTGRESQL_USER=user \
-      -e POSTGRESQL_DATABASE=db \
-      -e POSTGRESQL_PASSWORD=password"
-pod_name: "rhel8-postgresql-12"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/postgresql-container/master/examples/postgresql-persistent-template.json -p POSTGRESQL_VERSION=12-el8 -p NAMESPACE={{ oc_project_rhscl }} \
+    -p DATABASE_SERVICE_NAME=postgresql-12 \
+	-p POSTGRESQL_DATABASE=opdb \
+	-p POSTGRESQL_USER=user \
+	-p POSTGRESQL_PASSWORD=pass | oc apply -f -"
+pod_name: "postgresql-12"
 add_route: true
 test_exec_command: "./files/check_postgresql_container.sh"
 expected_exec_result: "FINE"

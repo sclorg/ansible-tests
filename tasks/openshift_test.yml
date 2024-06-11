@@ -1,19 +1,27 @@
 - block:
   - debug: var=stuff
+  - debug: var=service_ip
 
-  - name: Check curl command is working
-    uri:
-      url: "http://{{ route_cmd.stdout }}"
-      return_content: yes
-      status_code: 200
-      body_format: "{{ stuff.curl_output_format | default('json') }}"
-    retries: 20
+  - name: Check if curl command is working
+    script: "./files/check_oc_exec_output.sh 'curl {{ service_ip.stdout | trim }}:8080' '{{ cluster_name.stdout | trim }}' '{{ stuff.check_curl_output }}'"
+    retries: 10
     delay: 20
     register: curl_output
     ignore_errors: yes
-    until: ("status" in curl_output) and (curl_output.status == 200)
+    until: (curl_output.rc == 0) and ("Connection refused" not in curl_output["stderr"])
+#  - name: Check curl command is working
+#    uri:
+#      url: "http://{{ route_cmd.stdout }}"
+#      return_content: yes
+#      status_code: 200
+#      body_format: "{{ stuff.curl_output_format | default('json') }}"
+#    retries: 19
+#    delay: 20
+#    register: curl_output
+#    ignore_errors: yes
+#    until: ("status" in curl_output) and (curl_output.status == 200)
 
-  - name: Check proper output in json
+  - name: Check proper output
     debug:
       var: curl_output
 
@@ -26,7 +34,7 @@
           add_children:
             - failure:
                 message: "Check curl Test failed"
-            - system-err: "{{ curl_output.msg | trim }}"
+            - system-err: "{{ curl_output.stdout | trim }}"
 
       - name: Increment testsuite failures attribute
         xml:
@@ -34,7 +42,7 @@
           xpath: "{{ xml_testsuite_path }}"
           attribute: failures
           value: "{{ testsuite_attrs.failures|int + 1 }}"
-    when: (curl_output["content"] is not defined) or ("{{ stuff.check_curl_output }}" not in curl_output["content"])
+    when: (curl_output["stdout"] is not defined) or ("{{ stuff.check_curl_output }}" not in curl_output["stdout"])
 
   - name: Write test case passed elements
     xml:
@@ -42,8 +50,8 @@
       xpath: "{{ xml_testcase_path }}"
       pretty_print: yes
       add_children:
-        - system-out: "{{ curl_output.msg | trim }}"
-    when: '"{{ stuff.check_curl_output }}" in curl_output["content"]'
+        - system-out: "FINE"
+    when: '"{{ stuff.check_curl_output }}" in curl_output["stdout"]'
 
   when: (stuff.check_curl_output is defined)
 
@@ -54,7 +62,7 @@
     script: "{{ stuff.test_exec_command }} {{ cluster_name.stdout | trim }} '{{ stuff.expected_exec_result }}'"
     ignore_errors: yes
     register: command_out
-    retries: 20
+    retries: 5
     delay: 20
     until: command_out.rc == 0
 

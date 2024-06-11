@@ -33,7 +33,7 @@
     when: (ext_test == "") or (ext_test == "s2i") or (ext_test == "nos2i")
 
   - name: Get list of projects for DOTNET
-    shell: "oc projects | grep dotnet-ci-testing"
+    shell: "oc projects | grep dotnet-ci"
     changed_when: false
     register: oc_projects
     ignore_errors: yes

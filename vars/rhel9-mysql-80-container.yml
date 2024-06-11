@@ -1,14 +1,11 @@
 registry_redhat_io: "rhel9/mysql-80"
-tag_name: "mysql:8.0"
-deployment: "oc new-app mysql:8.0~https://github.com/sclorg/mysql-container.git \
-	--name rhel9-mysql-80 \
-	--context-dir=examples/extend-image \
-	--env MYSQL_OPERATIONS_USER=opuser \
-	--env MYSQL_OPERATIONS_PASSWORD=oppass \
-	--env MYSQL_DATABASE=opdb \
-	--env MYSQL_USER=user \
-	--env MYSQL_PASSWORD=pass"
-pod_name: "rhel9-mysql-80"
+tag_name: "mysql:8.0-el9"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/mysql-container/master/examples/mysql-persistent-template.json -p MYSQL_VERSION=8.0-el9 -p NAMESPACE={{ oc_project_rhscl }} \
+    -p DATABASE_SERVICE_NAME=mysql-80 \
+	-p MYSQL_DATABASE=opdb \
+	-p MYSQL_USER=user \
+	-p MYSQL_PASSWORD=pass | oc apply -f -"
+pod_name: "mysql-80"
 add_route: true
 test_exec_command: "./files/check_mysql_container.sh"
 expected_exec_result: "FINE"

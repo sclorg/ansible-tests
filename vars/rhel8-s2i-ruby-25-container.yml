@@ -1,7 +1,7 @@
 registry_redhat_io: "rhel8/ruby-25"
 tag_name: "ruby:2.5-el8"
-deployment: "oc new-app ruby:2.5-el8~https://github.com/sclorg/s2i-ruby-container.git --context-dir=2.5/test/puma-test-app/"
-pod_name: "s2i-ruby-container"
+deployment: "oc new-app ruby:2.5-el8~https://github.com/sclorg/s2i-ruby-container.git --name=ruby-example --context-dir=2.5/test/puma-test-app/"
+pod_name: "ruby-example"
 add_route: true
 check_curl_output: "Hello world"
 scl_url: "s2i-ruby-container"
