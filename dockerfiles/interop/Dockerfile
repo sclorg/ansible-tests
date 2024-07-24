@@ -9,10 +9,6 @@ RUN microdnf update -y --nodocs --setopt=install_weak_deps=0 --setopt=*.excludep
   && microdnf install python3-lxml \
   && microdnf install wget
 
-WORKDIR /usr/local/bin
-RUN wget -q https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz \
-  && tar xvf openshift-client-linux.tar.gz
-
 RUN mkdir -p /tmp/tests/ansible-tests
 WORKDIR /tmp/tests/ansible-tests
 COPY . .
