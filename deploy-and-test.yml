@@ -166,6 +166,8 @@
         - rhel9-nodejs-ex-18-minimal
         - rhel9-nodejs-ex-20
         - rhel9-nodejs-ex-20-minimal
+        - rhel9-nodejs-ex-22
+        - rhel9-nodejs-ex-22-minimal
         - rhel9-s2i-perl-532-container
         - rhel9-s2i-python-39-container
         - rhel9-s2i-python-311-container
