@@ -18,11 +18,11 @@
     java_17:
       - java-17-container
     java: "{{ java_8 + java_11 + java_17 }}"
-    dotnet_60:
-      - rhel8-dotnet60-container
     dotnet_80:
       - rhel8-dotnet80-container
-    dotnet: "{{ dotnet_60 + dotnet_80}}"
+    dotnet_90:
+      - rhel8-dotnet90-container
+    dotnet: "{{ dotnet_80 + dotnet_90}}"
   tasks:
     - debug: var=ext_test
     - debug: var=github_repo
@@ -191,4 +191,4 @@
       include_tasks: ./tasks/verify_in_openshift.yml
       loop: "{{ lookup('vars', ext_test) }}"
       when: (ext_test is defined) and (ext_test in
-        ["dotnet", "dotnet_60", "dotnet_80"])
+        ["dotnet", "dotnet_80", "dotnet_90"])

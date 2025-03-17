@@ -1,4 +1,4 @@
-registry_redhat_io: "rhel8/dotnet-70"
+registry_redhat_io: "rhel8/dotnet-80"
 tag_name: "dotnet80"
 deployment: "oc new-app dotnet80:latest~https://github.com/redhat-developer/s2i-dotnetcore-ex#dotnet-8.0 --context-dir=app"
 pod_name: "s2i-dotnetcore-ex"
