@@ -35,7 +35,7 @@ jobs:
       # https://github.com/sclorg/testing-farm-as-github-action
       - name: Schedule tests on external Testing Farm by Testing-Farm-as-github-action
         id: github_action
-        uses: sclorg/testing-farm-as-github-action@v2
+        uses: sclorg/testing-farm-as-github-action@main
         with:
           api_key: ${{ secrets.TF_INTERNAL_API_KEY }}
           git_url: "https://gitlab.cee.redhat.com/platform-eng-core-services/sclorg-tmt-plans"
@@ -45,4 +45,4 @@ jobs:
           pull_request_status_name: ${{ matrix.context }}
           update_pull_request_status: true
           variables: "REPO_URL=${{ github.server_url }}/${{ github.repository }};REPO_NAME=${{ github.repository }};PR_NUMBER=${{ github.event.issue.number }};TEST_NAME=ocp4-tests;EXT_TEST=${{ matrix.ext_test }}"
-          compose: "RHEL-8.8.0-Nightly"
+          compose: "RHEL-9.4.0-Nightly"
