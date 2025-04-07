@@ -89,7 +89,6 @@
         - rhel8-postgresql-15-container
         - rhel8-postgresql-16-container
         - rhel8-s2i-ruby-25-container
-        - rhel8-s2i-ruby-31-container
         - rhel8-s2i-ruby-33-container
         - rhel8-mysql-80-container
         - rhel8-nginx-ex-122
@@ -112,7 +111,6 @@
         - rhel9-s2i-python-311-container
         - rhel9-s2i-python-312-container
         - rhel9-s2i-ruby-30-container
-        - rhel9-s2i-ruby-31-container
         - rhel9-s2i-ruby-33-container
       when: (github_repo == "") and (ext_test == "")
 
@@ -158,7 +156,6 @@
         - rhel8-s2i-python-311-container
         - rhel8-s2i-python-312-container
         - rhel8-s2i-ruby-25-container
-        - rhel8-s2i-ruby-31-container
         - rhel8-s2i-ruby-33-container
         - rhel9-nodejs-ex-18
         - rhel9-nodejs-ex-18-minimal
@@ -171,7 +168,6 @@
         - rhel9-s2i-python-311-container
         - rhel9-s2i-python-312-container
         - rhel9-s2i-ruby-30-container
-        - rhel9-s2i-ruby-31-container
         - rhel9-s2i-ruby-33-container
       when: (github_repo == "") and (ext_test is defined) and (ext_test == "s2i")
 
