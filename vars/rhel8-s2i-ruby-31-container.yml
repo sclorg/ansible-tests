@@ -1,8 +1,0 @@
-registry_redhat_io: "ubi8/ruby-31"
-tag_name: "ruby:3.1-ubi8"
-deployment: "oc new-app ruby:3.1-ubi8~https://github.com/sclorg/s2i-ruby-container.git --name=ruby-example --context-dir=3.1/test/puma-test-app/"
-pod_name: "ruby-example"
-add_route: true
-check_curl_output: "Hello world"
-scl_url: "s2i-ruby-container"
-is_name: "ruby"
