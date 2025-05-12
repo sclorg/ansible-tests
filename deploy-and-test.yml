@@ -112,6 +112,18 @@
         - rhel9-s2i-python-312-container
         - rhel9-s2i-ruby-30-container
         - rhel9-s2i-ruby-33-container
+        - rhel10-httpd-ex
+        - rhel10-nodejs-ex-22
+        - rhel10-nodejs-ex-22-minimal
+        - rhel10-mariadb-1011-container
+        - rhel10-mysql-84-container
+        - rhel10-s2i-ruby-33-container
+        - rhel10-s2i-python-312-minimal-container
+        - rhel10-postgresql-16-container
+        - rhel10-s2i-perl-540-container
+        - rhel10-valkey-8
+        - rhel10-nginx-ex-126
+        - rhel10-cakephp-ex-83
       when: (github_repo == "") and (ext_test == "")
 
     - name: Check None-s2i containers
@@ -136,6 +148,12 @@
         - rhel9-postgresql-13-container
         - rhel9-postgresql-15-container
         - rhel9-postgresql-16-container
+        - rhel10-httpd-ex
+        - rhel10-mariadb-1011-container
+        - rhel10-mysql-84-container
+        - rhel10-postgresql-16-container
+        - rhel10-valkey-8
+        - rhel10-nginx-ex-126
       when: (github_repo == "") and (ext_test is defined) and (ext_test == "nos2i")
 
     - name: Check s2i containers
@@ -169,6 +187,12 @@
         - rhel9-s2i-python-312-container
         - rhel9-s2i-ruby-30-container
         - rhel9-s2i-ruby-33-container
+        - rhel10-nodejs-ex-22
+        - rhel10-nodejs-ex-22-minimal
+        - rhel10-s2i-ruby-33-container
+        - rhel10-s2i-python-312-minimal-container
+        - rhel10-s2i-perl-540-container
+        - rhel10-cakephp-ex-83
       when: (github_repo == "") and (ext_test is defined) and (ext_test == "s2i")
 
     - name: Clone and test only one upstream container repository
