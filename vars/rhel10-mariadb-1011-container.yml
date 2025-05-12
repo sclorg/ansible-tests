@@ -1,0 +1,13 @@
+registry_redhat_io: "rhel10/mariadb-1011"
+tag_name: "mariadb:10.11-el10"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/mariadb-container/master/examples/mariadb-persistent-template.json -p MARIADB_VERSION=10.11-el10 -p NAMESPACE={{ oc_project_rhscl }} \
+    -p DATABASE_SERVICE_NAME=mariadb-1011 \
+	-p MYSQL_DATABASE=opdb \
+	-p MYSQL_USER=user \
+	-p MYSQL_PASSWORD=pass | oc apply -f -"
+pod_name: "mariadb-1011"
+add_route: true
+test_exec_command: "./files/check_mariadb_container.sh"
+expected_exec_result: "FINE"
+scl_url: "mariadb-container"
+is_name: "mariadb"

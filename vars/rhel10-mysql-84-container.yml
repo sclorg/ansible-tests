@@ -1,0 +1,13 @@
+registry_redhat_io: "rhel10/mysql-84"
+tag_name: "mysql:8.4-el10"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/mysql-container/master/examples/mysql-persistent-template.json -p MYSQL_VERSION=8.4-el10 -p NAMESPACE={{ oc_project_rhscl }} \
+    -p DATABASE_SERVICE_NAME=mysql-84 \
+	-p MYSQL_DATABASE=opdb \
+	-p MYSQL_USER=user \
+	-p MYSQL_PASSWORD=pass | oc apply -f -"
+pod_name: "mysql-84"
+add_route: true
+test_exec_command: "./files/check_mysql_container.sh"
+expected_exec_result: "FINE"
+scl_url: "mysql-container"
+is_name: "mysql"

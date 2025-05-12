@@ -1,0 +1,13 @@
+registry_redhat_io: "rhel10/postgresql-16"
+tag_name: "postgresql:16-el10"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/postgresql-container/master/examples/postgresql-persistent-template.json -p POSTGRESQL_VERSION=16-el10 -p NAMESPACE={{ oc_project_rhscl }} \
+    -p DATABASE_SERVICE_NAME=postgresql-16 \
+	-p POSTGRESQL_DATABASE=opdb \
+	-p POSTGRESQL_USER=user \
+	-p POSTGRESQL_PASSWORD=pass | oc apply -f -"
+pod_name: "postgresql-16"
+add_route: true
+test_exec_command: "./files/check_postgresql_container.sh"
+expected_exec_result: "FINE"
+scl_url: "postgresql-container"
+is_name: "postgresql"
