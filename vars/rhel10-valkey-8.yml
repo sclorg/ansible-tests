@@ -1,0 +1,8 @@
+registry_redhat_io: "rhel10/valkey-8"
+tag_name: "valkey:8-el10"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/valkey-container/refs/heads/master/examples/valkey-persistent-template.json -p POSTGRESQL_VERSION=8-el10 -p NAMESPACE={{ oc_project_rhscl }}"
+pod_name: "valkey-8"
+add_route: true
+scl_url: "valkey-container"
+is_name: "valkey"
+test_exec_command: "./files/check_valkey_container.sh 'valkey' 'PONG'"

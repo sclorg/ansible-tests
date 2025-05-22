@@ -1,0 +1,8 @@
+registry_redhat_io: "ubi10/ruby-33"
+tag_name: "ruby:3.3-ubi10"
+deployment: "oc new-app ruby:3.3-ubi10~https://github.com/sclorg/s2i-ruby-container.git --context-dir=3.3/test/puma-test-app/"
+pod_name: "s2i-ruby-container"
+add_route: true
+check_curl_output: "Hello world"
+scl_url: "s2i-ruby-container"
+is_name: "ruby"
