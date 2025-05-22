@@ -66,8 +66,6 @@
     - name: Clone and test upstream container repositories
       include_tasks: ./tasks/verify_in_openshift.yml
       loop:
-        - rhel8-nodejs-ex-18
-        - rhel8-nodejs-ex-18-minimal
         - rhel8-nodejs-ex-20
         - rhel8-nodejs-ex-20-minimal
         - rhel8-cakephp-ex-74
@@ -99,8 +97,6 @@
         - rhel9-mysql-80-container
         - rhel9-nginx-ex-122
         - rhel9-nginx-ex-124
-        - rhel9-nodejs-ex-18
-        - rhel9-nodejs-ex-18-minimal
         - rhel9-nodejs-ex-20
         - rhel9-nodejs-ex-20-minimal
         - rhel9-postgresql-13-container
@@ -159,8 +155,6 @@
     - name: Check s2i containers
       include_tasks: ./tasks/verify_in_openshift.yml
       loop:
-        - rhel8-nodejs-ex-18
-        - rhel8-nodejs-ex-18-minimal
         - rhel8-nodejs-ex-20
         - rhel8-nodejs-ex-20-minimal
         - rhel8-cakephp-ex-74
@@ -175,8 +169,6 @@
         - rhel8-s2i-python-312-container
         - rhel8-s2i-ruby-25-container
         - rhel8-s2i-ruby-33-container
-        - rhel9-nodejs-ex-18
-        - rhel9-nodejs-ex-18-minimal
         - rhel9-nodejs-ex-20
         - rhel9-nodejs-ex-20-minimal
         - rhel9-nodejs-ex-22
