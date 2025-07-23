@@ -76,7 +76,6 @@
         - rhel8-django-ex-python-38
         - rhel8-mariadb-105-container
         - rhel8-mariadb-1011-container
-        - rhel8-s2i-perl-532-container
         - rhel8-s2i-perl-526-container
         - rhel8-s2i-python-36-container
         - rhel8-s2i-python-39-container
@@ -162,7 +161,6 @@
         #- rhel8-cakephp-ex-81 It looks like no prepared for PHP-8.0
         - rhel8-django-ex-python-36
         - rhel8-django-ex-python-38
-        - rhel8-s2i-perl-532-container
         - rhel8-s2i-perl-526-container
         - rhel8-s2i-python-36-container
         - rhel8-s2i-python-39-container
