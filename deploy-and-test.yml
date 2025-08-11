@@ -166,6 +166,7 @@
         - rhel8-s2i-python-312-container
         - rhel8-s2i-ruby-25-container
         - rhel8-s2i-ruby-33-container
+        - rhel9-cakephp-ex-80
         - rhel9-cakephp-ex-83
         - rhel9-nodejs-ex-20
         - rhel9-nodejs-ex-20-minimal

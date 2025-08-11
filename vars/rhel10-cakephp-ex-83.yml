@@ -1,6 +1,6 @@
 registry_redhat_io: "ubi10/php-83"
 tag_name: "php:8.3-ubi10"
-deployment: "oc process -f https://raw.githubusercontent.com/sclorg/cakephp-ex/5.X/openshift/templates/cakephp.json -p PHP_VERSION=8.3-ubi10 -p NAMESPACE={{ oc_project_rhscl }} | oc apply -f -"
+deployment: "oc process -f https://raw.githubusercontent.com/sclorg/cakephp-ex/5.X/openshift/templates/cakephp.json -p PHP_VERSION=8.3-ubi10 -p SOURCE_REPOSITORY_REF=5.X -p NAMESPACE={{ oc_project_rhscl }} | oc apply -f -"
 pod_name: "cakephp-example"
-check_curl_output: "Welcome to your CakePHP application on OpenShift"
+check_curl_output: "Welcome to CakePHP"
 scl_url: "cakephp-ex"
