@@ -158,9 +158,7 @@
         - rhel8-nodejs-ex-20
         - rhel8-nodejs-ex-20-minimal
         - rhel8-cakephp-ex-74
-        #- rhel8-cakephp-ex-81 It looks like no prepared for PHP-8.0
         - rhel8-django-ex-python-36
-        - rhel8-django-ex-python-38
         - rhel8-s2i-perl-526-container
         - rhel8-s2i-python-36-container
         - rhel8-s2i-python-39-container
@@ -168,6 +166,7 @@
         - rhel8-s2i-python-312-container
         - rhel8-s2i-ruby-25-container
         - rhel8-s2i-ruby-33-container
+        - rhel9-cakephp-ex-80
         - rhel9-cakephp-ex-83
         - rhel9-nodejs-ex-20
         - rhel9-nodejs-ex-20-minimal
