@@ -157,6 +157,8 @@
       loop:
         - rhel8-nodejs-ex-20
         - rhel8-nodejs-ex-20-minimal
+        - rhel8-nodejs-ex-22
+        - rhel8-nodejs-ex-22-minimal
         - rhel8-cakephp-ex-74
         - rhel8-django-ex-python-36
         - rhel8-s2i-perl-526-container
