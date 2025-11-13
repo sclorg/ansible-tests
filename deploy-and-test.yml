@@ -98,6 +98,10 @@
         - rhel9-nginx-ex-124
         - rhel9-nodejs-ex-20
         - rhel9-nodejs-ex-20-minimal
+        - rhel9-nodejs-ex-22
+        - rhel9-nodejs-ex-22-minimal
+        - rhel9-nodejs-ex-24
+        - rhel9-nodejs-ex-24-minimal
         - rhel9-postgresql-13-container
         - rhel9-postgresql-15-container
         - rhel9-postgresql-16-container
@@ -108,9 +112,12 @@
         - rhel9-s2i-ruby-30-container
         - rhel9-s2i-ruby-33-container
         - rhel9-cakephp-ex-83
+        - rhel9-valkey-8
         - rhel10-httpd-ex
         - rhel10-nodejs-ex-22
         - rhel10-nodejs-ex-22-minimal
+        - rhel10-nodejs-ex-24
+        - rhel10-nodejs-ex-24-minimal
         - rhel10-mariadb-1011-container
         - rhel10-mysql-84-container
         - rhel10-s2i-ruby-33-container
@@ -144,6 +151,7 @@
         - rhel9-postgresql-13-container
         - rhel9-postgresql-15-container
         - rhel9-postgresql-16-container
+        - rhel9-valkey-8
         - rhel10-httpd-ex
         - rhel10-mariadb-1011-container
         - rhel10-mysql-84-container
@@ -174,6 +182,8 @@
         - rhel9-nodejs-ex-20-minimal
         - rhel9-nodejs-ex-22
         - rhel9-nodejs-ex-22-minimal
+        - rhel9-nodejs-ex-24
+        - rhel9-nodejs-ex-24-minimal
         - rhel9-s2i-perl-532-container
         - rhel9-s2i-python-39-container
         - rhel9-s2i-python-311-container
@@ -182,6 +192,8 @@
         - rhel9-s2i-ruby-33-container
         - rhel10-nodejs-ex-22
         - rhel10-nodejs-ex-22-minimal
+        - rhel10-nodejs-ex-24
+        - rhel10-nodejs-ex-24-minimal
         - rhel10-s2i-ruby-33-container
         - rhel10-s2i-python-312-minimal-container
         - rhel10-s2i-perl-540-container
