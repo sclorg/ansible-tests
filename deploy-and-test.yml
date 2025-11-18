@@ -22,7 +22,9 @@
       - rhel8-dotnet80-container
     dotnet_90:
       - rhel8-dotnet90-container
-    dotnet: "{{ dotnet_80 + dotnet_90}}"
+    dotnet_100:
+      - rhel9-dotnet100-container
+    dotnet: "{{ dotnet_80 + dotnet_90 + dotnet_100}}"
   tasks:
     - debug: var=ext_test
     - debug: var=github_repo
@@ -216,4 +218,4 @@
       include_tasks: ./tasks/verify_in_openshift.yml
       loop: "{{ lookup('vars', ext_test) }}"
       when: (ext_test is defined) and (ext_test in
-        ["dotnet", "dotnet_80", "dotnet_90"])
+        ["dotnet", "dotnet_80", "dotnet_90", "dotnet_100"])
