@@ -80,7 +80,6 @@
         - rhel8-mariadb-1011-container
         - rhel8-s2i-perl-526-container
         - rhel8-s2i-python-36-container
-        - rhel8-s2i-python-39-container
         - rhel8-s2i-python-311-container
         - rhel8-s2i-python-312-container
         - rhel8-postgresql-12-container
@@ -173,7 +172,6 @@
         - rhel8-django-ex-python-36
         - rhel8-s2i-perl-526-container
         - rhel8-s2i-python-36-container
-        - rhel8-s2i-python-39-container
         - rhel8-s2i-python-311-container
         - rhel8-s2i-python-312-container
         - rhel8-s2i-ruby-25-container
