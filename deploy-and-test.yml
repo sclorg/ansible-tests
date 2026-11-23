@@ -98,6 +98,8 @@
         - rhel9-nodejs-ex-22-minimal
         - rhel9-nodejs-ex-24
         - rhel9-nodejs-ex-24-minimal
+        - rhel9-nodejs-ex-26
+        - rhel9-nodejs-ex-26-minimal
         - rhel9-postgresql-13-container
         - rhel9-postgresql-15-container
         - rhel9-postgresql-16-container
@@ -116,6 +118,8 @@
         - rhel10-nodejs-ex-22-minimal
         - rhel10-nodejs-ex-24
         - rhel10-nodejs-ex-24-minimal
+        - rhel10-nodejs-ex-26
+        - rhel10-nodejs-ex-26-minimal
         - rhel10-mariadb-1011-container
         - rhel10-mariadb-118-container
         - rhel10-mysql-84-container
@@ -169,6 +173,8 @@
       loop:
         - rhel8-nodejs-ex-22
         - rhel8-nodejs-ex-22-minimal
+        - rhel8-nodejs-ex-26
+        - rhel8-nodejs-ex-26-minimal
         - rhel8-cakephp-ex-74
         - rhel8-django-ex-python-36
         - rhel8-s2i-perl-526-container
@@ -183,6 +189,8 @@
         - rhel9-nodejs-ex-22-minimal
         - rhel9-nodejs-ex-24
         - rhel9-nodejs-ex-24-minimal
+        - rhel9-nodejs-ex-26
+        - rhel9-nodejs-ex-26-minimal
         - rhel9-s2i-perl-532-container
         - rhel9-s2i-python-39-container
         - rhel9-s2i-python-312-container
@@ -194,6 +202,8 @@
         - rhel10-nodejs-ex-22-minimal
         - rhel10-nodejs-ex-24
         - rhel10-nodejs-ex-24-minimal
+        - rhel10-nodejs-ex-26
+        - rhel10-nodejs-ex-26-minimal
         - rhel10-s2i-ruby-33-container
         - rhel10-s2i-python-312-minimal-container
         - rhel10-s2i-python-314-minimal-container
